@@ -12,5 +12,11 @@ Users create a short story beginnings, and other users can add chapters or creat
 - PWA
 - Offline functionality
 
-# Links
+# Link for Feature map and plan
 Feature map: https://github.com/users/ashuragi007-jpg/projects/3
+
+## Core MVP Features
+- #01 Create user accounts
+- #02 Start a new story
+- #03 Continue existing story
+- #04 Branch stories
