@@ -13,7 +13,8 @@ Users create a short story beginnings, and other users can add chapters or creat
 - Offline functionality
 
 # Link for Feature map and plan
-Feature map: https://github.com/users/ashuragi007-jpg/projects/3
+Feature Map: https://www.figma.com/board/nZKzigzMy93RhhyVOSFRiG/Welcome-to-FigJam?node-id=0-1&t=tnfk5r6hunYfpqI5-1 
+Project Plan: https://github.com/users/ashuragi007-jpg/projects/3
 
 ## Core MVP Features
 - #01 Create user accounts
