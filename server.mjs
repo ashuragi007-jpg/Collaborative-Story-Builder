@@ -1,7 +1,6 @@
 import express from "express";
-import validateChapterLength from "./modules/validateChapterLength.js";
+import validateChapterLength from "./modules/validateChapterLength.mjs";
 
-const express = require('express')
 const app = express()
 const port = 3001
 
@@ -14,7 +13,7 @@ app.post("/api/chapters", validateChapterLength, (req, res) =>{
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello000 World!')
+  res.send('Hello World!')
 });
 
 app.listen(port, () => {
