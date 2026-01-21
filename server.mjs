@@ -1,16 +1,12 @@
 import express from "express";
-import validateChapterLength from "./modules/validateChapterLength.mjs";
+import chapterRouter from "./routes/chapters.mjs";
 
 const app = express()
 const port = 3001
 
 app.use(express.json());
 
-app.post("/api/chapters", validateChapterLength, (req, res) =>{
-  res.json({
-    message:"Chapter accepted"
-  });
-});
+app.use("/chapters", chapterRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
