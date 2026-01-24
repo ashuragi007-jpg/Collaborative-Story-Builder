@@ -1,0 +1,53 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Collab Story Builder
+meta:
+  id: wrk_7730505d9cd94b109dc9ae8b8f7d7d5a
+  created: 1769294645942
+  modified: 1769294662999
+  description: ""
+collection:
+  - url: http://localhost:3004/chapters
+    name: My first request
+    meta:
+      id: req_53308f123531492899c9e9d3c0cacdaa
+      created: 1769294645947
+      modified: 1769296718543
+      isPrivate: false
+      description: ""
+      sortKey: -1769294645947
+    method: POST
+    body:
+      mimeType: application/json
+      text: >
+        {
+          "content": "Test to see if this sentence is long enough to hit an error. A b c d e f g h i j k l m n o p q r s t u v w x y z one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen "
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.3.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_3702d689d1381bdc8f957db0a13f1ec8eb3b9689
+    created: 1769294645944
+    modified: 1769294645944
+environments:
+  name: Base Environment
+  meta:
+    id: env_3702d689d1381bdc8f957db0a13f1ec8eb3b9689
+    created: 1769294645944
+    modified: 1769294645944
+    isPrivate: false
