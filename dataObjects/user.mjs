@@ -3,6 +3,12 @@ const Users = {};
 function user(){
     return {
         id: null,
+        username: null,
+        passwordHash: null,
+        consent: {
+            ToSAcceptedAt: null,
+            consentVersion: "1.0"
+        }
     };
 }
 

@@ -7,15 +7,30 @@ const userRouter = express.Router();
 userRouter.use(express.json());
 
 userRouter.post("/", (req, res, next) => {
+    const { username, password, ToSAccepted } = req.body ?? {};
+
+     if (!username || typeof username !== "string") {
+    return res.status(400).json({ error: "username required" });
+    }
+    if (!password || typeof password !== "string") {
+    return res.status(400).json({ error: "password required" });
+    }
+    if (ToSAccepted !== true) {
+    return res.status(400).json({ error: "ToSAccepted must be true" });
+    }
 
     let newUser = user();
     newUser.id = generateID();
-
-
-
-    //res.json(JSON.stringify(newUser));
+    newUser.username = username;
+    newUser.consent.tosAcceptedAt = new Date().toISOString();
     
-     res.status(201).json(newUser);
+
+    return res.status(201).json({
+    id: newUser.id,
+    username: newUser.username,
+    tosAcceptedAt: newUser.consent.tosAcceptedAt
+  });
+
 });
 
 export default userRouter;
