@@ -15,6 +15,21 @@ userRouter.get("/", (req, res) => {
   })));
 });
 
+userRouter.get("/:id", (req, res) => {
+  const found = users.find(u => u.id === req.params.id);
+
+  if (!found) {
+    return res.status(404).json({ error: "user not found" });
+  }
+
+  res.json({
+    id: found.id,
+    username: found.username,
+    tosAcceptedAt: found.consent.tosAcceptedAt
+  });
+});
+
+
 userRouter.post("/", (req, res, next) => {
     const { username, password, ToSAccepted } = req.body ?? {};
 
