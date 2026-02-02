@@ -1,10 +1,19 @@
 import express from "express"
 import user from "../dataObjects/user.mjs";
 import { generateID } from "../dataObjects/user.mjs";
+import { users } from "../dataStores/usersStore.mjs";
 
 const userRouter = express.Router();
 
 userRouter.use(express.json());
+
+userRouter.get("/", (req, res) => {
+  res.json(users.map(u => ({
+    id: u.id,
+    username: u.username,
+    tosAcceptedAt: u.consent.tosAcceptedAt
+  })));
+});
 
 userRouter.post("/", (req, res, next) => {
     const { username, password, ToSAccepted } = req.body ?? {};
@@ -23,6 +32,8 @@ userRouter.post("/", (req, res, next) => {
     newUser.id = generateID();
     newUser.username = username;
     newUser.consent.tosAcceptedAt = new Date().toISOString();
+
+    users.push(newUser);
     
 
     return res.status(201).json({
@@ -30,6 +41,8 @@ userRouter.post("/", (req, res, next) => {
     username: newUser.username,
     tosAcceptedAt: newUser.consent.tosAcceptedAt
   });
+
+  
 
 });
 
