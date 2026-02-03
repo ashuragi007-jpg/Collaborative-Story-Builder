@@ -57,8 +57,18 @@ userRouter.post("/", (req, res, next) => {
     tosAcceptedAt: newUser.consent.tosAcceptedAt
   });
 
-  
 
 });
 
+userRouter.delete("/:id", (req, res) => {
+  const index = users.findIndex(u => u.id === req.params.id);
+
+  if (index === -1){
+    return res.status(404).json({ error : "User not found" });
+  }
+
+  users.splice(index, 1);
+  return res.status(204).send();
+})
+     
 export default userRouter;
