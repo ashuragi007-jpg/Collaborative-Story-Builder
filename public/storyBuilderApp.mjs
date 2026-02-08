@@ -7,7 +7,7 @@ root.innerHTML = `
 
   <user-create></user-create>
 
-  <button id="refresh">GET/ Users</button>
+  <button id="getusers">GET/ Users</button>
   <pre id="out">(loading...)</pre>
   <p id="status"></p>
 `;
@@ -41,7 +41,7 @@ function render() {
   root.querySelector("#status").textContent = `Users: ${state.users.length}`;
 }
 
-root.querySelector("#refresh").addEventListener("click", () => {
+root.querySelector("#getusers").addEventListener("click", () => {
   loadUsers().catch(err => {
     root.querySelector("#status").textContent = err.message;
   });
