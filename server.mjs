@@ -9,7 +9,7 @@ const port = 3004
 
 app.use(express.json());
 
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 app.use("/stories", storyRouter);
 app.use("/chapters", chapterRouter);
 
