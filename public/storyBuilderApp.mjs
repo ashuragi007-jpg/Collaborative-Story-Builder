@@ -1,5 +1,6 @@
 import "./components/user-create.mjs";
 import "./components/user-delete.mjs";
+import "./components/user-edit.mjs";
 import { usersActions } from "./logic/usersActions.mjs";
 
 const root = document.querySelector("#app");
@@ -9,6 +10,7 @@ root.innerHTML = `
 
   <user-create></user-create>
   <user-delete></user-delete>
+  <user-edit></user-edit>
 
   <button id="getusers">GET /users</button>
   <pre id="out">(loading...)</pre>

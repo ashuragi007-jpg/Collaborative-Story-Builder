@@ -70,5 +70,27 @@ userRouter.delete("/:id", (req, res) => {
   users.splice(index, 1);
   return res.status(204).send();
 })
-     
+
+userRouter.patch("/:id", (req, res) => {
+  const { username } = req.body ?? {};
+
+  if (!username || typeof username !== "string") {
+    return res.status(400).json({ error: "username required" });
+  }
+
+  const user = users.find(u => u.id === req.params.id);
+
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  user.username = username.trim();
+
+  return res.json({
+    id: user.id,
+    username: user.username,
+    tosAcceptedAt: user.consent.tosAcceptedAt
+  });
+});
+
 export default userRouter;
