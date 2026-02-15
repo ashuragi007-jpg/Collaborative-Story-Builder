@@ -15,6 +15,13 @@ This file contains API routes for the COllaborative Story Builder.
 ### GET /user/:id
 - returns a user that match the provided id
 - will return a 404 if user does not exist
+### PATCH /users/:id
+- updates the username of an existing user
+- returns a 404 if user does not exist
+
+### DELETE /users/:id
+- deletes a user
+- returns 404 if user does not exist
 
 ## Story API
 
