@@ -56,6 +56,4 @@ chapterRouter.post("/", sanitizeContent, validateChapterLength, (req, res) => {
     });
 });
 
-
-
 export default chapterRouter;
