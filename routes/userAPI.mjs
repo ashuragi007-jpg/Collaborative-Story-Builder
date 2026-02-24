@@ -1,13 +1,12 @@
 import express from "express"
-import user from "../dataObjects/user.mjs";
-import { generateID } from "../dataObjects/user.mjs";
-import { users } from "../dataStores/usersStore.mjs";
+import { listUsers, findUserById, createUser, deleteUserById, updateUsername } from "../services/userService.mjs";
 
 const userRouter = express.Router();
-
 userRouter.use(express.json());
 
 userRouter.get("/", (req, res) => {
+  const users = listUsers();
+
   res.json(users.map(u => ({
     id: u.id,
     username: u.username,
@@ -16,7 +15,7 @@ userRouter.get("/", (req, res) => {
 });
 
 userRouter.get("/:id", (req, res) => {
-  const found = users.find(u => u.id === req.params.id);
+  const found = findUserById(req.params.id);
 
   if (!found) {
     return res.status(404).json({ error: "user not found" });
@@ -29,47 +28,39 @@ userRouter.get("/:id", (req, res) => {
   });
 });
 
+userRouter.post("/", (req, res) => {
+  const { username, password, ToSAccepted } = req.body ?? {};
 
-userRouter.post("/", (req, res, next) => {
-    const { username, password, ToSAccepted } = req.body ?? {};
-
-     if (!username || typeof username !== "string") {
+  if (!username || typeof username !== "string") {
     return res.status(400).json({ error: "username required" });
-    }
-    if (!password || typeof password !== "string") {
+  }
+
+  if (!password || typeof password !== "string") {
     return res.status(400).json({ error: "password required" });
-    }
-    if (ToSAccepted !== true) {
+  }
+
+  if (ToSAccepted !== true) {
     return res.status(400).json({ error: "ToSAccepted must be true" });
-    }
+  }
 
-    let newUser = user();
-    newUser.id = generateID();
-    newUser.username = username;
-    newUser.consent.tosAcceptedAt = new Date().toISOString();
+  const newUser = createUser({ username });
 
-    users.push(newUser);
-    
-
-    return res.status(201).json({
+  return res.status(201).json({
     id: newUser.id,
     username: newUser.username,
     tosAcceptedAt: newUser.consent.tosAcceptedAt
   });
-
-
 });
 
 userRouter.delete("/:id", (req, res) => {
-  const index = users.findIndex(u => u.id === req.params.id);
+  const success = deleteUserById(req.params.id);
 
-  if (index === -1){
-    return res.status(404).json({ error : "User not found" });
+  if (!success) {
+    return res.status(404).json({ error: "User not found" });
   }
 
-  users.splice(index, 1);
   return res.status(204).send();
-})
+});
 
 userRouter.patch("/:id", (req, res) => {
   const { username } = req.body ?? {};
@@ -78,18 +69,16 @@ userRouter.patch("/:id", (req, res) => {
     return res.status(400).json({ error: "username required" });
   }
 
-  const user = users.find(u => u.id === req.params.id);
+  const updated = updateUsername(req.params.id, username);
 
-  if (!user) {
+  if (!updated) {
     return res.status(404).json({ error: "User not found" });
   }
 
-  user.username = username.trim();
-
   return res.json({
-    id: user.id,
-    username: user.username,
-    tosAcceptedAt: user.consent.tosAcceptedAt
+    id: updated.id,
+    username: updated.username,
+    tosAcceptedAt: updated.consent.tosAcceptedAt
   });
 });
 

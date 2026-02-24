@@ -6,7 +6,6 @@ class UserEdit extends HTMLElement {
     this.innerHTML = `
       <section class="card">
         <h2>Edit user</h2>
-
         <div class="row">
           <select></select>
           <input placeholder="New username" />
