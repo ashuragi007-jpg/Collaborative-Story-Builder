@@ -1,22 +1,12 @@
 import { usersActions } from "../logic/usersActions.mjs";
-
-const root = document.querySelector("#app");
+import { userState } from "../state/userState.mjs";
 
 class UserCreate extends HTMLElement {
   connectedCallback() {
-    this.innerHTML = `
-      <section class="card">
-        <h2>Create user</h2>
-        <form class="row">
-          <input name="username" placeholder="Username" required />
-          <input name="password" type="password" placeholder="Password" required />
-          <label class="row"><input type="checkbox" name="tos" /> Accept ToS</label>
-          <button>Create</button>
-        </form>
-        <p class="error" hidden></p>
-      </section>
-    `;
+    const tpl = document.getElementById("tpl-user-create");
+    this.replaceChildren(tpl.content.cloneNode(true));
 
+    const root = document.querySelector("#app");
     const form = this.querySelector("form");
     const err = this.querySelector(".error");
 
@@ -25,11 +15,15 @@ class UserCreate extends HTMLElement {
       err.hidden = true;
 
       try {
-        await usersActions.createUser(root, {
+        const created = await usersActions.createUser(root, {
           username: form.username.value.trim(),
           password: form.password.value,
           ToSAccepted: form.tos.checked,
         });
+
+        userState.setCurrentUserId(created.id);
+        document.dispatchEvent(new Event("session:changed"));
+
         form.reset();
       } catch (e) {
         err.textContent = e.message;
@@ -38,4 +32,5 @@ class UserCreate extends HTMLElement {
     });
   }
 }
+
 customElements.define("user-create", UserCreate);
