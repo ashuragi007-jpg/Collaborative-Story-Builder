@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Login / Account</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- Templates live in HTML (not JS) -->
+  <template id="tpl-user-create">
+    <section class="card">
+      <h2>Create user</h2>
+      <form class="row">
+        <input name="username" placeholder="Username" required />
+        <input name="password" type="password" placeholder="Password" required />
+
+        <label class="row">
+          <input type="checkbox" name="tos" required />
+          I accept the <a href="./tos.html" target="_blank">Terms of Service</a>
+          and <a href="./privacy.html" target="_blank">Privacy Policy</a>
+        </label>
+
+        <button>Create</button>
+      </form>
+      <p class="error" hidden></p>
+    </section>
+  </template>
+
+  <template id="tpl-account-manage">
+    <section class="card">
+      <h2>Manage account</h2>
+
+      <p class="who"></p>
+
+      <form class="row edit-form">
+        <input name="username" placeholder="New username" required />
+        <button type="submit">Save</button>
+      </form>
+
+      <button class="delete-btn">Delete my account</button>
+
+      <p class="error" hidden></p>
+    </section>
+  </template>
+
+  <script type="module" src="../loginApp.mjs"></script>
+</body>
+</html>
