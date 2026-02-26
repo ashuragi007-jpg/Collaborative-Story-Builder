@@ -1,4 +1,4 @@
-import { usersActions } from "../logic/usersActions.mjs";
+import { usersActions } from "../actions/usersActions.mjs";
 import { userState } from "../state/userState.mjs";
 
 class UserCreate extends HTMLElement {

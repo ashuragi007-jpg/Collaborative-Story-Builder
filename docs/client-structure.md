@@ -11,9 +11,11 @@ The structure is to that the main controller is inside the public folder and ins
 
 public/
 - storyBuilderApp.mjs
+- loginApp.mjs
 - components/
 - logic/
 - state/
+- pages/
 
 ## Roles
 
@@ -28,3 +30,9 @@ this folder contains the apiClient and usersActions. Its responsibilities are to
 
 ### state/
 this folder contains userState. its responsibilities are storing client-side user data.
+
+### pages/
+this folder contains all html files.
+
+##loginApp.mjs
+- The reason for making another entry point is so that i can separate user-related features from the main app features. User creation and account management are handled in loginApp.mjs while storyBuilderApp.mjs is for collaborative story functionality.

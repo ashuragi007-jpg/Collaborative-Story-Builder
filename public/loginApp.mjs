@@ -1,7 +1,7 @@
 import "./components/user-create.mjs";
 import "./components/account-manage.mjs";
 import { userState } from "./state/userState.mjs";
-import { usersActions } from "./logic/usersActions.mjs";
+import { usersActions } from "./actions/usersActions.mjs";
 
 const root = document.querySelector("#app");
 
