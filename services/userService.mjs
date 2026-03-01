@@ -37,11 +37,13 @@ export async function createUser({ username }) {
   };
 }
 
-export function deleteUserById(id) {
-  const index = users.findIndex(u => u.id === id);
-  if (index === -1) return false;
-  users.splice(index, 1);
-  return true;
+export async function deleteUserById(id) {
+  const result = await pool.query(
+    `delete from users where id = $1`,
+    [id]
+  );
+
+  return result.rowCount > 0;
 }
 
 export function updateUsername(id, username) {
