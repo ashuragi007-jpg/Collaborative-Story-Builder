@@ -1,5 +1,5 @@
 import express from "express"
-import { listUsers, findUserById, createUser, deleteUserById, updateUsername } from "../services/userService.mjs";
+import { createUser, deleteUserById, updateUsername } from "../services/userService.mjs";
 
 const userRouter = express.Router();
 userRouter.use(express.json());
@@ -58,34 +58,47 @@ userRouter.post("/", async (req, res) => {
   });
 });
 
-userRouter.delete("/:id", (req, res) => {
-  const success = deleteUserById(req.params.id);
+userRouter.delete("/:id", async (req, res) => {
+  try {
+    const success = await deleteUserById(req.params.id);
 
-  if (!success) {
-    return res.status(404).json({ error: "User not found" });
+    if (!success) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.status(204).send();
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "database error" });
   }
-
-  return res.status(204).send();
 });
 
-userRouter.patch("/:id", (req, res) => {
+userRouter.patch("/:id", async (req, res) => {
   const { username } = req.body ?? {};
 
   if (!username || typeof username !== "string") {
     return res.status(400).json({ error: "username required" });
   }
 
-  const updated = updateUsername(req.params.id, username);
+  try {
+    const updated = await updateUsername(req.params.id, username);
 
-  if (!updated) {
-    return res.status(404).json({ error: "User not found" });
+    if (!updated) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    return res.json({
+      id: updated.id,
+      username: updated.username,
+      tosAcceptedAt: updated.consent?.tosAcceptedAt ?? null,
+    });
+  } catch (err) {
+    if (err?.code === "23505") {
+      return res.status(409).json({ error: "username already taken" });
+    }
+    console.error(err);
+    return res.status(500).json({ error: "database error" });
   }
-
-  return res.json({
-    id: updated.id,
-    username: updated.username,
-    tosAcceptedAt: updated.consent.tosAcceptedAt
-  });
-});
+});;
 
 export default userRouter;
