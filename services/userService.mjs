@@ -46,9 +46,21 @@ export async function deleteUserById(id) {
   return result.rowCount > 0;
 }
 
-export function updateUsername(id, username) {
-  const u = users.find(x => x.id === id);
-  if (!u) return null;
-  u.username = username.trim();
-  return u;
+export async function updateUsername(id, username) {
+  const result = await pool.query(
+    `update users
+     set username = $2
+     where id = $1
+     returning id, username, created_at`,
+    [id, username.trim()]
+  );
+
+  const row = result.rows[0];
+  if (!row) return null;
+
+  return {
+    id: row.id,
+    username: row.username,
+    consent: { tosAcceptedAt: row.created_at }
+  };
 }
