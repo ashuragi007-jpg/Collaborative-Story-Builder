@@ -7,8 +7,18 @@ export function listUsers(){
     return users;
 }
 
-export function findUserById(id){
-    return users.find(u => u.id === id);
+export async function listUsers() {
+  const result = await pool.query(
+    `select id, username, created_at
+     from users
+     order by created_at desc`
+  );
+
+  return result.rows.map(r => ({
+    id: r.id,
+    username: r.username,
+    consent: { tosAcceptedAt: r.created_at }
+  }));
 }
 
 export async function createUser({ username }) {
