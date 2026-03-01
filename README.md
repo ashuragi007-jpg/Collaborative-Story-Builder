@@ -21,3 +21,11 @@ Users create a short story beginnings, and other users can add chapters or creat
 - #02 Start a new story
 - #03 Continue existing story
 - #04 Branch stories
+
+## Render
+
+The app is deployed on Render
+
+Base URL: https://collaborative-story-builder-zrt9.onrender.com
+
+Login page: https://collaborative-story-builder-zrt9.onrender.com/pages/login.html

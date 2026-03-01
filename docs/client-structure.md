@@ -22,6 +22,9 @@ public/
 ### storyBuilderApp.mjs
 It is responsible for rendering the main UI, wiring components together andstarting the application.
 
+### loginApp.mjs
+- The reason for making another entry point is so that i can separate user-related features from the main app features. User creation and account management are handled in loginApp.mjs while storyBuilderApp.mjs is for collaborative story functionality.
+
 ### components/
 this folder contains the custom web components like user-create and user-delete. It is responsible for handling user interaction, and rendeirng UI.
 
@@ -34,5 +37,3 @@ this folder contains userState. its responsibilities are storing client-side use
 ### pages/
 this folder contains all html files.
 
-##loginApp.mjs
-- The reason for making another entry point is so that i can separate user-related features from the main app features. User creation and account management are handled in loginApp.mjs while storyBuilderApp.mjs is for collaborative story functionality.
