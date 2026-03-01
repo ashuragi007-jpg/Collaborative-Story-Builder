@@ -1,11 +1,13 @@
 import express from "express";
+import "dotenv/config";
+import { pool } from "./db.mjs";
 import storyRouter from "./routes/storyAPI.mjs";
 import chapterRouter from "./routes/chaptersAPI.mjs";
 import userRouter from "./routes/userAPI.mjs";
 import securityAudit from "./modules/security.mjs";
 
 const app = express()
-const port = 3004
+const port = process.env.PORT || 3004;
 
 app.use(express.json());
 app.use(express.static("public"));

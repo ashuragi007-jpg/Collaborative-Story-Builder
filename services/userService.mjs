@@ -1,6 +1,7 @@
 import user from "../dataObjects/user.mjs";
 import { generateID } from "../dataObjects/user.mjs";
 import { users } from "../dataStores/usersStore.mjs";
+import { pool } from "../db.mjs";
 
 export function listUsers(){
     return users;
@@ -10,17 +11,23 @@ export function findUserById(id){
     return users.find(u => u.id === id);
 }
 
-export function createUser ({ username }) {
-    const newUser = user();
+export async function createUser({ username }) {
+  const result = await pool.query(
+    `insert into users (username, password_hash, tos_accepted)
+     values ($1, $2, $3)
+     returning id, username, created_at`,
+    [username.trim(), "temp_hash", true]
+  );
 
-    newUser.id = generateID();
-    newUser.username = username.trim();
+  const row = result.rows[0];
 
-    newUser.consent ??= {};
-    newUser.consent.tosAcceptedAt = new Date().toISOString();
-
-    users.push(newUser);
-    return newUser;
+  return {
+    id: row.id,
+    username: row.username,
+    consent: {
+      tosAcceptedAt: row.created_at
+    }
+  };
 }
 
 export function deleteUserById(id) {

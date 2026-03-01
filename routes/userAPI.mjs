@@ -28,7 +28,7 @@ userRouter.get("/:id", (req, res) => {
   });
 });
 
-userRouter.post("/", (req, res) => {
+userRouter.post("/", async (req, res) => {
   const { username, password, ToSAccepted } = req.body ?? {};
 
   if (!username || typeof username !== "string") {
@@ -43,7 +43,7 @@ userRouter.post("/", (req, res) => {
     return res.status(400).json({ error: "ToSAccepted must be true" });
   }
 
-  const newUser = createUser({ username });
+  const newUser = await createUser({ username });
 
   return res.status(201).json({
     id: newUser.id,
