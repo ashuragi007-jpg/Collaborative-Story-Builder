@@ -1,10 +1,10 @@
 import express from "express"
-import { createUser, deleteUserById, updateUsername } from "../services/userService.mjs";
+import { listUsers ,createUser, deleteUserById, updateUsername } from "../services/userService.mjs";
 
 const userRouter = express.Router();
 userRouter.use(express.json());
 
-/*
+
 userRouter.get("/", async (req, res) => {
   const users = await listUsers();
 
@@ -14,7 +14,7 @@ userRouter.get("/", async (req, res) => {
     tosAcceptedAt: u.consent.tosAcceptedAt
   })));
 });
-*/
+
 userRouter.get("/:id", async (req, res) => {
   const id = (req.params.id ?? "").trim();
 
