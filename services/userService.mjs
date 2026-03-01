@@ -3,9 +3,6 @@ import { generateID } from "../dataObjects/user.mjs";
 import { users } from "../dataStores/usersStore.mjs";
 import { pool } from "../db.mjs";
 
-export function listUsers(){
-    return users;
-}
 
 export async function listUsers() {
   const result = await pool.query(
