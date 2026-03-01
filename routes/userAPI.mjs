@@ -4,6 +4,7 @@ import { listUsers, findUserById, createUser, deleteUserById, updateUsername } f
 const userRouter = express.Router();
 userRouter.use(express.json());
 
+/*
 userRouter.get("/", async (req, res) => {
   const users = await listUsers();
 
@@ -13,7 +14,7 @@ userRouter.get("/", async (req, res) => {
     tosAcceptedAt: u.consent.tosAcceptedAt
   })));
 });
-
+*/
 userRouter.get("/:id", (req, res) => {
   const found = findUserById(req.params.id);
 
