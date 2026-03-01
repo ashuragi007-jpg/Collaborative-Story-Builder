@@ -15,18 +15,23 @@ userRouter.get("/", async (req, res) => {
   })));
 });
 */
-userRouter.get("/:id", (req, res) => {
-  const found = findUserById(req.params.id);
+userRouter.get("/:id", async (req, res) => {
+  try {
+    const found = await findUserById(req.params.id);
 
-  if (!found) {
-    return res.status(404).json({ error: "user not found" });
+    if (!found) {
+      return res.status(404).json({ error: "user not found" });
+    }
+
+    return res.json({
+      id: found.id,
+      username: found.username,
+      tosAcceptedAt: found.consent?.tosAcceptedAt ?? null,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: "database error" });
   }
-
-  res.json({
-    id: found.id,
-    username: found.username,
-    tosAcceptedAt: found.consent.tosAcceptedAt
-  });
 });
 
 userRouter.post("/", async (req, res) => {
