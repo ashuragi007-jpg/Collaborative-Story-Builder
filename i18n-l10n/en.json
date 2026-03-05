@@ -1,0 +1,24 @@
+{
+  "validation": {
+    "contentRequired": "Content is required",
+    "storyIdRequired": "Story ID is required",
+    "titleRequired": "Title is required",
+    "usernameRequired": "Username is required",
+    "passwordRequired": "Password is required",
+    "tosMustBeAccepted": "Terms of Service must be accepted",
+    "invalidUserIdFormat": "Invalid user ID format",
+    "chapterTooShort": "Chapter must be at least 50 words",
+    "chapterTooLong": "Chapter must not exceed 3000 words"
+  },
+  "errors": {
+    "chapterNotFound": "Chapter not found",
+    "storyNotFound": "Story not found",
+    "userNotFound": "User not found",
+    "databaseError": "Database error",
+    "usernameAlreadyTaken": "Username already taken"
+  },
+  "success": {
+    "chapterAccepted": "Chapter accepted",
+    "chapterAcceptedSanitized": "Chapter accepted, but illegal characters were removed"
+  }
+}

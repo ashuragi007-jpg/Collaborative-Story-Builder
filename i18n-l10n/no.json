@@ -1,0 +1,24 @@
+{
+  "validation": {
+    "contentRequired": "Innhold er påkrevd",
+    "storyIdRequired": "Story-ID er påkrevd",
+    "titleRequired": "Tittel er påkrevd",
+    "usernameRequired": "Brukernavn er påkrevd",
+    "passwordRequired": "Passord er påkrevd",
+    "tosMustBeAccepted": "Vilkår for bruk må godtas",
+    "invalidUserIdFormat": "Ugyldig bruker-ID format",
+    "chapterTooShort": "Kapittelet må være minst 50 ord",
+    "chapterTooLong": "Kapittelet kan ikke overstige 3000 ord"
+  },
+  "errors": {
+    "chapterNotFound": "Kapittel ikke funnet",
+    "storyNotFound": "Fortelling ikke funnet",
+    "userNotFound": "Bruker ikke funnet",
+    "databaseError": "Databasefeil",
+    "usernameAlreadyTaken": "Brukernavnet er allerede tatt"
+  },
+  "success": {
+    "chapterAccepted": "Kapittel godkjent",
+    "chapterAcceptedSanitized": "Kapittel godkjent, men ulovlige tegn ble fjernet"
+  }
+}
