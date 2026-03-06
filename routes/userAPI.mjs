@@ -11,7 +11,7 @@ import { translate } from "../modules/translator.mjs";
 const userRouter = express.Router();
 userRouter.use(express.json());
 
-/*
+
 userRouter.get("/", async (req, res) => {
   const users = await listUsers();
 
@@ -23,7 +23,7 @@ userRouter.get("/", async (req, res) => {
     }))
   );
 });
-*/
+
 userRouter.get("/:id", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
   const id = (req.params.id ?? "").trim();
