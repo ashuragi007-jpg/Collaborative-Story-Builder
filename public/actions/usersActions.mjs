@@ -9,6 +9,20 @@ export const usersActions = {
     document.dispatchEvent(new Event("users:updated"));
   },
 
+  async login(root, { username, password }) {
+  const data = await api("/users/login", {
+    method: "POST",
+    body: { username, password },
+  });
+
+  userState.setCurrentUserId(data.id);
+  localStorage.setItem("currentUserId", data.id);
+  localStorage.setItem("currentUsername", data.username);
+
+  document.dispatchEvent(new Event("session:changed"));
+  return data;
+},
+
   async createUser(root, { username, password, ToSAccepted }) {
     const created = await api("/users", {
       method: "POST",

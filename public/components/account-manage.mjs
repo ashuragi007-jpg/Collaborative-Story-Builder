@@ -13,6 +13,16 @@ class AccountManage extends HTMLElement {
     this.deleteBtn = this.querySelector(".delete-btn");
     this.err = this.querySelector(".error");
 
+    const logoutBtn = this.querySelector(".logout-btn");
+
+    logoutBtn.addEventListener("click", () => {
+    userState.setCurrentUserId(null);
+
+    localStorage.removeItem("currentUserId");
+
+    document.dispatchEvent(new Event("session:changed"));
+});
+
     const rerender = () => this.render();
     document.addEventListener("users:updated", rerender);
     document.addEventListener("session:changed", rerender);
@@ -74,6 +84,8 @@ class AccountManage extends HTMLElement {
       await usersActions.deleteUser(this.root, id);
 
       userState.setCurrentUserId(null);
+      localStorage.removeItem("currentUserId");
+      localStorage.removeItem("currentUsername");
       document.dispatchEvent(new Event("session:changed"));
     } catch (e) {
       this.setError(e.message);
