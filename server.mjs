@@ -12,7 +12,7 @@ const port = process.env.PORT || 3004;
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use("/users", userRouter);
+app.use("/users", securityAudit, userRouter);
 app.use("/stories", storyRouter);
 app.use("/chapters", chapterRouter);
 

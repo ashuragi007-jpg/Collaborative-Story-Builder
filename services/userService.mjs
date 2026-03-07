@@ -18,12 +18,12 @@ export async function listUsers() {
   }));
 }
 
-export async function createUser({ username }) {
+export async function createUser({ username, passwordHash }) {
   const result = await pool.query(
     `insert into users (username, password_hash, tos_accepted)
      values ($1, $2, $3)
      returning id, username, created_at`,
-    [username.trim(), "temp_hash", true]
+    [username.trim(), passwordHash, true]
   );
 
   const row = result.rows[0];

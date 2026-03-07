@@ -1,11 +1,6 @@
 import express from "express";
-import {
-  listUsers,
-  createUser,
-  deleteUserById,
-  updateUsername,
-  
-} from "../services/userService.mjs";
+import {listUsers, createUser, deleteUserById, updateUsername,} from "../services/userService.mjs";
+import { isValidUuid } from "../services/validation.mjs";
 import { translate } from "../modules/translator.mjs";
 
 const userRouter = express.Router();
@@ -26,17 +21,13 @@ userRouter.get("/", async (req, res) => {
 
 userRouter.get("/:id", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
-  const id = (req.params.id ?? "").trim();
+  const { id } = req.params;
 
-  const uuidPattern =
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
-  if (!uuidPattern.test(id)) {
+  if (!isValidUuid(id)) {
     return res.status(400).json({
-      error: translate(lang, "validation.invalidUserIdFormat"),
+      error: translate(lang, "validation.invalidUserId"),
     });
   }
-
   try {
     const found = await findUserById(id);
 
@@ -45,7 +36,6 @@ userRouter.get("/:id", async (req, res) => {
         error: translate(lang, "errors.userNotFound"),
       });
     }
-
     return res.json({
       id: found.id,
       username: found.username,
@@ -61,7 +51,7 @@ userRouter.get("/:id", async (req, res) => {
 
 userRouter.post("/", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
-  const { username, password, ToSAccepted } = req.body ?? {};
+  const { username, ToSAccepted } = req.body ?? {};
 
   if (!username || typeof username !== "string") {
     return res.status(400).json({
@@ -69,7 +59,7 @@ userRouter.post("/", async (req, res) => {
     });
   }
 
-  if (!password || typeof password !== "string") {
+  if (!req.token?.psw) {
     return res.status(400).json({
       error: translate(lang, "validation.passwordRequired"),
     });
@@ -81,7 +71,10 @@ userRouter.post("/", async (req, res) => {
     });
   }
 
-  const newUser = await createUser({ username });
+  const newUser = await createUser({
+    username,
+    passwordHash: req.token.psw,
+  });
 
   return res.status(201).json({
     id: newUser.id,
@@ -92,18 +85,24 @@ userRouter.post("/", async (req, res) => {
 
 userRouter.delete("/:id", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
+  const { id } = req.params;
+
+  if (!isValidUuid(id)) {
+    return res.status(400).json({
+      error: translate(lang, "validation.invalidUserId"),
+    });
+  }
 
   try {
-    const success = await deleteUserById(req.params.id);
+    const success = await deleteUserById(id);
 
     if (!success) {
       return res.status(404).json({
         error: translate(lang, "errors.userNotFound"),
       });
     }
-
     return res.status(204).send();
-  } catch (err) {
+    } catch (err) {
     console.error(err);
     return res.status(500).json({
       error: translate(lang, "errors.databaseError"),
@@ -113,7 +112,14 @@ userRouter.delete("/:id", async (req, res) => {
 
 userRouter.patch("/:id", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
+  const { id } = req.params;
   const { username } = req.body ?? {};
+
+  if (!isValidUuid(id)) {
+    return res.status(400).json({
+      error: translate(lang, "validation.invalidUserId"),
+    });
+  }
 
   if (!username || typeof username !== "string") {
     return res.status(400).json({
@@ -122,7 +128,7 @@ userRouter.patch("/:id", async (req, res) => {
   }
 
   try {
-    const updated = await updateUsername(req.params.id, username);
+    const updated = await updateUsername(id, username);
 
     if (!updated) {
       return res.status(404).json({
