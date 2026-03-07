@@ -13,7 +13,6 @@ if (savedUserId) {
 }
 
 root.innerHTML = `
-  <h1>User Account</h1>
   <user-login></user-login>
   <user-create></user-create>
   <account-manage></account-manage>

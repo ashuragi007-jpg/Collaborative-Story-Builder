@@ -3,25 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <title>Login / Account</title>
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <div id="app"></div>
 
   <template id="tpl-login">
-    <section class="card">
-      <h2>Login</h2>
+  <section class="card login-card">
+    <h2>User Login</h2>
+    
 
-      <form class="row">
-        <input name="username" placeholder="Username" required />
-        <input name="password" type="password" placeholder="Password" required />
-        <button>Login</button>
-      </form>
+    <form class="login-form">
+      <input
+        name="username"
+        type="text"
+        placeholder="Username"
+        required
+      />
 
-      <p class="error" hidden></p>
-    </section>
-  </template>
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        required
+      />
 
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <p class="error" hidden></p>
+  </section>
+</template>
   <template id="tpl-user-create">
     <section class="card">
       <h2>Create user</h2>
