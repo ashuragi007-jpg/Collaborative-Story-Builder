@@ -1,5 +1,5 @@
 import express from "express";
-import {listUsers, createUser, deleteUserById, updateUsername,} from "../services/userService.mjs";
+import {listUsers, findUserByUsername , createUser, deleteUserById, updateUsername,} from "../services/userService.mjs";
 import { isValidUuid } from "../services/validation.mjs";
 import { translate } from "../modules/translator.mjs";
 
@@ -81,6 +81,49 @@ userRouter.post("/", async (req, res) => {
     username: newUser.username,
     tosAcceptedAt: newUser.consent.tosAcceptedAt,
   });
+});
+
+userRouter.post("/login", async (req, res) => {
+  const lang = req.headers["accept-language"] || "";
+  const { username } = req.body ?? {};
+
+  if (!username || typeof username !== "string") {
+    return res.status(400).json({
+      error: translate(lang, "validation.usernameRequired"),
+    });
+  }
+
+  if (!req.token?.psw) {
+    return res.status(400).json({
+      error: translate(lang, "validation.passwordRequired"),
+    });
+  }
+
+  try {
+    const found = await findUserByUsername(username);
+
+    if (!found) {
+      return res.status(401).json({
+        error: translate(lang, "auth.invalidCredentials"),
+      });
+    }
+
+    if (found.passwordHash !== req.token.psw) {
+      return res.status(401).json({
+        error: translate(lang, "auth.invalidCredentials"),
+      });
+    }
+
+    return res.json({
+      id: found.id,
+      username: found.username,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      error: translate(lang, "errors.databaseError"),
+    });
+  }
 });
 
 userRouter.delete("/:id", async (req, res) => {

@@ -20,5 +20,8 @@
   "success": {
     "chapterAccepted": "Kapittel godkjent",
     "chapterAcceptedSanitized": "Kapittel godkjent, men ulovlige tegn ble fjernet"
+  },
+  "auth": {
+    "invalidCredentials": "Ugyldig brukernavn eller passord"
   }
 }

@@ -20,5 +20,8 @@
   "success": {
     "chapterAccepted": "Chapter accepted",
     "chapterAcceptedSanitized": "Chapter accepted, but illegal characters were removed"
+  },
+  "auth": {
+    "invalidCredentials": "Invalid username or password"
   }
 }

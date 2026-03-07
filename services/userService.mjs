@@ -64,3 +64,21 @@ export async function updateUsername(id, username) {
     consent: { tosAcceptedAt: row.created_at }
   };
 }
+
+export async function findUserByUsername(username) {
+  const result = await pool.query(
+    `select id, username, password_hash
+     from users
+     where username = $1`,
+    [username.trim()]
+  );
+
+  const row = result.rows[0];
+  if (!row) return null;
+
+  return {
+    id: row.id,
+    username: row.username,
+    passwordHash: row.password_hash,
+  };
+}
