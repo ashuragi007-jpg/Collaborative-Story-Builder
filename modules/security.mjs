@@ -1,8 +1,9 @@
 import { createHmac } from "node:crypto";
 
 function securityAudit(req, res, next) {
-  if (req.method === "POST" && req.body.password) {
-    req.token = createSecurePassToken(req.body.password, process.env.SECRET);
+  if (req.body?.password) {
+    const psw = req.body.password;
+    req.token = createSecurePassToken(psw, process.env.SECRET);
   }
 
   next();

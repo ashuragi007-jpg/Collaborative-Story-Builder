@@ -65,6 +65,25 @@ export async function updateUsername(id, username) {
   };
 }
 
+export async function updatePassword(id, passwordHash) {
+  const result = await pool.query(
+    `update users
+     set password_hash = $2
+     where id = $1
+     returning id, username, created_at`,
+    [id, passwordHash]
+  );
+
+  const row = result.rows[0];
+  if (!row) return null;
+
+  return {
+    id: row.id,
+    username: row.username,
+    consent: { tosAcceptedAt: row.created_at }
+  };
+}
+
 export async function findUserByUsername(username) {
   const result = await pool.query(
     `select id, username, password_hash

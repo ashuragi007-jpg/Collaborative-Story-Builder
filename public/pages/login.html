@@ -40,7 +40,7 @@
       <form class="row">
         <input name="username" placeholder="Username" required />
         <input name="password" type="password" placeholder="Password" required />
-
+<br>
         <label class="row">
           <input type="checkbox" name="tos" required />
           I accept the <a href="./tos.html" target="_blank">Terms of Service</a>
@@ -54,23 +54,38 @@
   </template>
 
   <template id="tpl-account-manage">
-    <section class="card">
-      <h2>Manage account</h2>
+  <section class="card">
+    <h2>Manage account</h2>
 
-      <p class="who"></p>
+    <div class="account-info">
+      <h3>Information</h3>
+      <p><strong>ID:</strong> <span class="info-id"></span></p>
+      <p><strong>Username:</strong> <span class="info-username"></span></p>
+      <p><strong>Created:</strong> <span class="info-created"></span></p>
+    </div>
+
+    <div class="account-change">
+      <h3>Change</h3>
 
       <form class="row edit-form">
         <input name="username" placeholder="New username" required />
-        <button type="submit">Save</button>
+        <button type="submit">Save username</button>
       </form>
 
+      <form class="row password-form">
+        <input name="password" type="password" placeholder="New password" required />
+        <button type="submit">Save password</button>
+      </form>
+    </div>
+
+    <div class="account-actions">
       <button class="logout-btn" type="button">Logout</button>
+      <button class="delete-btn" type="button">Delete my account</button>
+    </div>
 
-      <button class="delete-btn">Delete my account</button>
-
-      <p class="error" hidden></p>
-    </section>
-  </template>
+    <p class="error" hidden></p>
+  </section>
+</template>
 
   <script type="module" src="../loginApp.mjs"></script>
 </body>

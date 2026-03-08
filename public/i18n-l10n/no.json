@@ -22,6 +22,7 @@
     "chapterAcceptedSanitized": "Kapittel godkjent, men ulovlige tegn ble fjernet"
   },
   "auth": {
-    "invalidCredentials": "Ugyldig brukernavn eller passord"
+    "invalidCredentials": "Ugyldig brukernavn eller passord",
+    "confirmPasswordChange": "Er du sikker på at du vil endre passordet?"
   }
 }

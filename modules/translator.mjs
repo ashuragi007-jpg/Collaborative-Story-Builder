@@ -5,8 +5,8 @@ import { fileURLToPath } from "node:url";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-const enPath = path.join(dirname, "../i18n-l10n/en.json");
-const noPath = path.join(dirname, "../i18n-l10n/no.json");
+const enPath = path.join(dirname, "../public/i18n-l10n/en.json");
+const noPath = path.join(dirname, "../public/i18n-l10n/no.json");
 
 const dictionaries = {
   en: JSON.parse(fs.readFileSync(enPath, "utf-8")),

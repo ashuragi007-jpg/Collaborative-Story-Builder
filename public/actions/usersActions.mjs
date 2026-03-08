@@ -45,7 +45,17 @@ export const usersActions = {
     method: "PATCH",
     body: { username: clean }
   });
+},
+
+async editPassword(root, id, password) {
+  const clean = String(password ?? "").trim();
+  if (!clean) throw new Error("Password required");
+
+  await api(`/users/${id}/password`, {
+    method: "PATCH",
+    body: { password: clean }
+  });
 
   await this.loadUsers(root);
-}
+},
 };

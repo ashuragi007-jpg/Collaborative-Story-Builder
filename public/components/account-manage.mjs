@@ -1,5 +1,6 @@
 import { userState } from "../state/userState.mjs";
 import { usersActions } from "../actions/usersActions.mjs";
+import { translate } from "../utils/translate.mjs";
 
 class AccountManage extends HTMLElement {
   connectedCallback() {
@@ -7,27 +8,34 @@ class AccountManage extends HTMLElement {
     this.replaceChildren(tpl.content.cloneNode(true));
 
     this.root = document.querySelector("#app");
-    this.who = this.querySelector(".who");
+
+    this.infoId = this.querySelector(".info-id");
+    this.infoUsername = this.querySelector(".info-username");
+    this.infoCreated = this.querySelector(".info-created");
+
     this.form = this.querySelector(".edit-form");
     this.input = this.form.username;
+
+    this.passwordForm = this.querySelector(".password-form");
+    this.passwordInput = this.passwordForm.password;
+
     this.deleteBtn = this.querySelector(".delete-btn");
+    this.logoutBtn = this.querySelector(".logout-btn");
     this.err = this.querySelector(".error");
 
-    const logoutBtn = this.querySelector(".logout-btn");
-
-    logoutBtn.addEventListener("click", () => {
-    userState.setCurrentUserId(null);
-
-    localStorage.removeItem("currentUserId");
-
-    document.dispatchEvent(new Event("session:changed"));
-});
+    this.logoutBtn.addEventListener("click", () => {
+      userState.setCurrentUserId(null);
+      localStorage.removeItem("currentUserId");
+      localStorage.removeItem("currentUsername");
+      document.dispatchEvent(new Event("session:changed"));
+    });
 
     const rerender = () => this.render();
     document.addEventListener("users:updated", rerender);
     document.addEventListener("session:changed", rerender);
 
     this.form.addEventListener("submit", (e) => this.onSave(e));
+    this.passwordForm.addEventListener("submit", (e) => this.onPasswordSave(e));
     this.deleteBtn.addEventListener("click", () => this.onDelete());
 
     this.render();
@@ -53,8 +61,13 @@ class AccountManage extends HTMLElement {
     }
 
     this.hidden = false;
-    this.who.textContent = `Logged in as: ${u.username} (${u.id})`;
+
+    this.infoId.textContent = u.id;
+    this.infoUsername.textContent = u.username;
+    this.infoCreated.textContent = u.tosAcceptedAt ?? "Unknown";
+
     this.input.value = u.username;
+    this.passwordInput.value = "";
     this.setError("");
   }
 
@@ -67,6 +80,26 @@ class AccountManage extends HTMLElement {
 
     try {
       await usersActions.editUser(this.root, id, newName);
+    } catch (e) {
+      this.setError(e.message);
+    }
+  }
+
+  async onPasswordSave(e) {
+    e.preventDefault();
+    this.setError("");
+
+    const id = userState.currentUserId;
+    const newPassword = this.passwordInput.value.trim();
+    const lang = navigator.language;
+
+    if (!confirm(translate(lang, "auth.confirmPasswordChange"))) {
+      return;
+    }
+
+    try {
+      await usersActions.editPassword(this.root, id, newPassword);
+      this.passwordInput.value = "";
     } catch (e) {
       this.setError(e.message);
     }
