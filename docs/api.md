@@ -10,8 +10,6 @@ This file contains API routes for the COllaborative Story Builder.
 - requires username (IGN) and user must accept Terms of Service.
 - Generate unique  ID 
 
-- Generates a unique ID and hashes the submitted password. Data of the users are stored in PostgreSQL database.
-
 ### GET /users
 - Returns all stored user
 
@@ -47,7 +45,7 @@ This file contains API routes for the COllaborative Story Builder.
 - returns all stored stories.
 
 ### GET /stories/:id 
-- returns a story that matched the id
+- returns a story that matches the id
 - returns 404 if the story doesnt exist
 
 
@@ -60,9 +58,7 @@ This file contains API routes for the COllaborative Story Builder.
     - sanitize chapters by removing scripts and tags
 
 ### GET /chapters
-    - get a list of chapters
-    - this currently returns an empty list, chapters: []
-    - Currently a scaffold to test if GET works.
+    - get a list of chapters   
 
 ### GET /chapters/:id
     - returns specific chapter that match the chapter id
