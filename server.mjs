@@ -16,7 +16,9 @@ app.use("/users", securityAudit, userRouter);
 app.use("/stories", storyRouter);
 app.use("/chapters", chapterRouter);
 
-
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: "public" });
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
