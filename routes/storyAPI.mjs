@@ -1,19 +1,19 @@
 import express from "express";
-import crypto from "node:crypto";
-import { stories } from "../dataStores/storiesStore.mjs";
+import { createStory, listStories, findStoryById } from "../services/storyService.mjs";
 import { translate } from "../modules/translator.mjs";
 
 const storyRouter = express.Router();
 
 storyRouter.use(express.json());
 
-storyRouter.get("/", (req, res) => {
+storyRouter.get("/", async (req, res) => {
+  const stories = await listStories();
   res.json({ stories });
 });
 
-storyRouter.get("/:id", (req, res) => {
+storyRouter.get("/:id", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
-  const story = stories.find(s => s.id === req.params.id);
+  const story = await findStoryById(req.params.id);
 
   if (!story) {
     return res.status(404).json({
@@ -24,7 +24,7 @@ storyRouter.get("/:id", (req, res) => {
   res.json(story);
 });
 
-storyRouter.post("/", (req, res) => {
+storyRouter.post("/", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
   const { title, description } = req.body ?? {};
 
@@ -34,14 +34,7 @@ storyRouter.post("/", (req, res) => {
     });
   }
 
-  const newStory = {
-    id: crypto.randomUUID(),
-    title: title.trim(),
-    description: description || "",
-    createdAt: new Date().toISOString()
-  };
-
-  stories.push(newStory);
+  const newStory = await createStory({ title, description });
 
   res.status(201).json(newStory);
 });

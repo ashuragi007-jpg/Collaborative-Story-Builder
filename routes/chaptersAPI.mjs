@@ -1,26 +1,31 @@
 import express from "express";
-import crypto from "node:crypto";
 import validateChapterLength from "../modules/validateChapterLength.mjs";
 import sanitizeContent from "../modules/sanitizeContent.mjs";
-import { chapters } from "../dataStores/chaptersStore.mjs";
+import {
+  listChapters,
+  listChaptersByStoryId,
+  findChapterById,
+  createChapter
+} from "../services/chapterService.mjs";
 import { translate } from "../modules/translator.mjs";
 
 const chapterRouter = express.Router();
 
 chapterRouter.use(express.json());
 
-chapterRouter.get("/", (req, res) => {
+chapterRouter.get("/", async (req, res) => {
+  const chapters = await listChapters();
   res.json({ chapters });
 });
 
-chapterRouter.get("/byStory/:storyId", (req, res) => {
-  const filtered = chapters.filter((c) => c.storyId === req.params.storyId);
-  res.json({ chapters: filtered });
+chapterRouter.get("/byStory/:storyId", async (req, res) => {
+  const chapters = await listChaptersByStoryId(req.params.storyId);
+  res.json({ chapters });
 });
 
-chapterRouter.get("/:id", (req, res) => {
+chapterRouter.get("/:id", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
-  const chapter = chapters.find((c) => c.id === req.params.id);
+  const chapter = await findChapterById(req.params.id);
 
   if (!chapter) {
     return res.status(404).json({
@@ -31,7 +36,7 @@ chapterRouter.get("/:id", (req, res) => {
   res.json(chapter);
 });
 
-chapterRouter.post("/", sanitizeContent, validateChapterLength, (req, res) => {
+chapterRouter.post("/", sanitizeContent, validateChapterLength, async (req, res) => {
   const lang = req.headers["accept-language"] || "";
   const { storyId, content } = req.body ?? {};
 
@@ -47,14 +52,10 @@ chapterRouter.post("/", sanitizeContent, validateChapterLength, (req, res) => {
     });
   }
 
-  const newChapter = {
-    id: crypto.randomUUID(),
+  const newChapter = await createChapter({
     storyId,
-    content,
-    createdAt: new Date().toISOString(),
-  };
-
-  chapters.push(newChapter);
+    content
+  });
 
   res.json({
     message: req.sanitized
@@ -62,8 +63,8 @@ chapterRouter.post("/", sanitizeContent, validateChapterLength, (req, res) => {
       : translate(lang, "success.chapterAccepted"),
     chapter: {
       id: newChapter.id,
-      storyId: newChapter.storyId,
-      createdAt: newChapter.createdAt,
+      storyId: newChapter.story_id,
+      createdAt: newChapter.created_at,
     },
   });
 });
