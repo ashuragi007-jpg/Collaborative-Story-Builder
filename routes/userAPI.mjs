@@ -83,49 +83,6 @@ userRouter.post("/", async (req, res) => {
   });
 });
 
-userRouter.post("/login", async (req, res) => {
-  const lang = req.headers["accept-language"] || "";
-  const { username } = req.body ?? {};
-
-  if (!username || typeof username !== "string") {
-    return res.status(400).json({
-      error: translate(lang, "validation.usernameRequired"),
-    });
-  }
-
-  if (!req.token?.psw) {
-    return res.status(400).json({
-      error: translate(lang, "validation.passwordRequired"),
-    });
-  }
-
-  try {
-    const found = await findUserByUsername(username);
-
-    if (!found) {
-      return res.status(401).json({
-        error: translate(lang, "auth.invalidCredentials"),
-      });
-    }
-
-    if (found.passwordHash !== req.token.psw) {
-      return res.status(401).json({
-        error: translate(lang, "auth.invalidCredentials"),
-      });
-    }
-
-    return res.json({
-      id: found.id,
-      username: found.username,
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({
-      error: translate(lang, "errors.databaseError"),
-    });
-  }
-});
-
 userRouter.delete("/:id", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
   const { id } = req.params;
@@ -190,44 +147,6 @@ userRouter.patch("/:id", async (req, res) => {
         error: translate(lang, "errors.usernameAlreadyTaken"),
       });
     }
-    console.error(err);
-    return res.status(500).json({
-      error: translate(lang, "errors.databaseError"),
-    });
-  }
-});
-
-userRouter.patch("/:id/password", async (req, res) => {
-  const lang = req.headers["accept-language"] || "";
-  const { id } = req.params;
-
-  if (!isValidUuid(id)) {
-    return res.status(400).json({
-      error: translate(lang, "validation.invalidUserId"),
-    });
-  }
-
-  if (!req.token?.psw) {
-    return res.status(400).json({
-      error: translate(lang, "validation.passwordRequired"),
-    });
-  }
-
-  try {
-    const updated = await updatePassword(id, req.token.psw);
-
-    if (!updated) {
-      return res.status(404).json({
-        error: translate(lang, "errors.userNotFound"),
-      });
-    }
-
-    return res.json({
-      id: updated.id,
-      username: updated.username,
-      tosAcceptedAt: updated.consent?.tosAcceptedAt ?? null,
-    });
-  } catch (err) {
     console.error(err);
     return res.status(500).json({
       error: translate(lang, "errors.databaseError"),

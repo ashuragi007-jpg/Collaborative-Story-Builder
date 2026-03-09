@@ -10,7 +10,7 @@ export const usersActions = {
   },
 
   async login(root, { username, password }) {
-  const data = await api("/users/login", {
+  const data = await api("/auth/login", {
     method: "POST",
     body: { username, password },
   });

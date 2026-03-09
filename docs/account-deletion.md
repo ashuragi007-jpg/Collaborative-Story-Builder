@@ -1,11 +1,13 @@
 # Account Deletion
 
 ## Personal Data
-When user deletes their accound, the following information are deleted:
-- user ID
+When a user deletes their account, the following stored information is removed from the database:
+- id
 - username
-- password hash: the gibberish generated text
-- consent 
+- password_hash
+- tos_accepted
+
+Doing so will permanently deletes user account from the system
 
 ## Contributions
 Story and branch contents created by users will be part of a collaborative work. In order to preserve the story, the content are preserve but remove personal attribution connected to the deleted account. This means:

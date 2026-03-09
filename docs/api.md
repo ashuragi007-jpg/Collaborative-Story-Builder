@@ -5,16 +5,20 @@ This file contains API routes for the COllaborative Story Builder.
 
 ## User API
 
-### POST /user
+### POST /users
 - Creats a user profile
 - requires username (IGN) and user must accept Terms of Service.
 - Generate unique  ID 
 
-### GET /user
+- Generates a unique ID and hashes the submitted password. Data of the users are stored in PostgreSQL database.
+
+### GET /users
 - Returns all stored user
-### GET /user/:id
+
+### GET /users/:id
 - returns a user that match the provided id
 - will return a 404 if user does not exist
+
 ### PATCH /users/:id
 - updates the username of an existing user
 - returns a 404 if user does not exist
@@ -22,6 +26,14 @@ This file contains API routes for the COllaborative Story Builder.
 ### DELETE /users/:id
 - deletes a user
 - returns 404 if user does not exist
+
+## Auth API
+
+### POST /auth/login
+- this log in an existing user
+
+### PATCH /auth/users/:id/password
+- this changes user's password
 
 ## Story API
 
@@ -39,13 +51,16 @@ This file contains API routes for the COllaborative Story Builder.
 - returns 404 if the story doesnt exist
 
 
-## Endpoints
-- `POST /chapters` - create new chapter 
+## Chapter API
+
+### POST /chapters
+    - create new chapter 
     - Requires storyId and chapter content
     - Checks if the submitted chapters exists and between 50 to 3000 words.
     - sanitize chapters by removing scripts and tags
 
-- `GET /chapters` - get a list of chapters
+### GET /chapters
+    - get a list of chapters
     - this currently returns an empty list, chapters: []
     - Currently a scaffold to test if GET works.
 
