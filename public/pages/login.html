@@ -9,83 +9,118 @@
   <div id="app"></div>
 
   <template id="tpl-login">
-  <section class="card login-card">
-    <h2>User Login</h2>
-    
+    <section class="card login-card">
+      <h2>User Login</h2>
 
-    <form class="login-form">
-      <input
-        name="username"
-        type="text"
-        placeholder="Username"
-        required
-      />
+      <form class="login-form" aria-label="Login form">
+        <label for="login-username">Username</label>
+        <input
+          id="login-username"
+          name="username"
+          type="text"
+          placeholder="Username"
+          required
+        />
 
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        required
-      />
+        <label for="login-password">Password</label>
+        <input
+          id="login-password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
 
-      <button type="submit" class="login-btn">Login</button>
-    </form>
+        <button type="submit" class="login-btn">Login</button>
+      </form>
 
-    <p class="error" hidden></p>
-  </section>
-</template>
+      <p class="error" role="alert" hidden></p>
+    </section>
+  </template>
+
   <template id="tpl-user-create">
     <section class="card">
       <h2>Create user</h2>
-      <form class="row">
-        <input name="username" placeholder="Username" required />
-        <input name="password" type="password" placeholder="Password" required />
-<br>
-        <label class="row">
-          <input type="checkbox" name="tos" required />
+
+      <form class="row" aria-label="Create user form">
+        <label for="create-username">Username</label>
+        <input
+          id="create-username"
+          name="username"
+          type="text"
+          placeholder="Username"
+          required
+        />
+
+        <label for="create-password">Password</label>
+        <input
+          id="create-password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+        />
+
+        <label class="row" for="create-tos">
+          <input id="create-tos" type="checkbox" name="tos" required />
           I accept the <a href="./tos.html" target="_blank">Terms of Service</a>
           and <a href="./privacy.html" target="_blank">Privacy Policy</a>
         </label>
 
-        <button>Create</button>
+        <button type="submit">Create user</button>
       </form>
-      <p class="error" hidden></p>
+
+      <p class="error" role="alert" hidden></p>
     </section>
   </template>
 
   <template id="tpl-account-manage">
-  <section class="card">
-    <h2>Manage account</h2>
+    <section class="card">
+      <h2>Manage account</h2>
 
-    <div class="account-info">
-      <h3>Information</h3>
-      <p><strong>ID:</strong> <span class="info-id"></span></p>
-      <p><strong>Username:</strong> <span class="info-username"></span></p>
-      <p><strong>Created:</strong> <span class="info-created"></span></p>
-    </div>
+      <div class="account-info">
+        <h3>Information</h3>
+        <p><strong>ID:</strong> <span class="info-id"></span></p>
+        <p><strong>Username:</strong> <span class="info-username"></span></p>
+        <p><strong>Created:</strong> <span class="info-created"></span></p>
+      </div>
 
-    <div class="account-change">
-      <h3>Change</h3>
+      <div class="account-change">
+        <h3>Change</h3>
 
-      <form class="row edit-form">
-        <input name="username" placeholder="New username" required />
-        <button type="submit">Save username</button>
-      </form>
+        <form class="row edit-form" aria-label="Change username form">
+          <label for="edit-username">New username</label>
+          <input
+            id="edit-username"
+            name="username"
+            type="text"
+            placeholder="New username"
+            required
+          />
+          <button type="submit">Save username</button>
+        </form>
 
-      <form class="row password-form">
-        <input name="password" type="password" placeholder="New password" required />
-        <button type="submit">Save password</button>
-      </form>
-    </div>
+        <form class="row password-form" aria-label="Change password form">
+          <label for="edit-password">New password</label>
+          <input
+            id="edit-password"
+            name="password"
+            type="password"
+            placeholder="New password"
+            required
+          />
+          <button type="submit">Save password</button>
+        </form>
+      </div>
 
-    <div class="account-actions">
-      <button class="logout-btn" type="button">Logout</button>
-      <button class="delete-btn" type="button">Delete my account</button>
-    </div>
+      <div class="account-actions">
+        <button class="logout-btn" type="button">Logout</button>
+        <button class="delete-btn" type="button">Delete my account</button>
+      </div>
 
-    <p class="error" hidden></p>
-  </section>
-</template>
+      <p class="error" role="alert" hidden></p>
+    </section>
+  </template>
 
   <script type="module" src="../loginApp.mjs"></script>
 </body>
