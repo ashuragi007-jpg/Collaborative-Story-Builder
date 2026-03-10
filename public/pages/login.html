@@ -12,8 +12,9 @@
     <section class="card login-card">
       <h2>User Login</h2>
 
-      <form class="login-form" aria-label="Login form">
-        <label for="login-username">Username</label>
+      <form class="login-form">
+
+        <label for="login-username" class="visually-hidden">Username</label>
         <input
           id="login-username"
           name="username"
@@ -22,7 +23,7 @@
           required
         />
 
-        <label for="login-password">Password</label>
+        <label for="login-password" class="visually-hidden">Password</label>
         <input
           id="login-password"
           name="password"
@@ -38,12 +39,14 @@
     </section>
   </template>
 
+
   <template id="tpl-user-create">
     <section class="card">
       <h2>Create user</h2>
 
-      <form class="row" aria-label="Create user form">
-        <label for="create-username">Username</label>
+      <form class="row">
+
+        <label for="create-username" class="visually-hidden">Username</label>
         <input
           id="create-username"
           name="username"
@@ -52,7 +55,7 @@
           required
         />
 
-        <label for="create-password">Password</label>
+        <label for="create-password" class="visually-hidden">Password</label>
         <input
           id="create-password"
           name="password"
@@ -88,8 +91,8 @@
       <div class="account-change">
         <h3>Change</h3>
 
-        <form class="row edit-form" aria-label="Change username form">
-          <label for="edit-username">New username</label>
+        <form class="row edit-form">
+          <label for="edit-username" class="visually-hidden">New username</label>
           <input
             id="edit-username"
             name="username"
@@ -100,8 +103,8 @@
           <button type="submit">Save username</button>
         </form>
 
-        <form class="row password-form" aria-label="Change password form">
-          <label for="edit-password">New password</label>
+        <form class="row password-form">
+          <label for="edit-password" class="visually-hidden">New password</label>
           <input
             id="edit-password"
             name="password"
