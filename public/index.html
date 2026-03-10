@@ -7,11 +7,49 @@
 </head>
 <body>
 
-    <h2>Test Library</h2>
+    <header class="app-header">
+        <h1>Collaboraive Story Builder</h1>
+        <p class="tagline">Write and make the story together. Make countless posibilities together</p>
+
+        <button id="create-story-btn">Create Story</button>
+    </header>
+
+    <section id="create-story-section" hidden>
+        <h2>Create Story</h2>
+
+        <form id="create-story-form">
+            <label for="story-title" class="visually-hidden">Story Title</label>
+            <input 
+            id="story-title"
+            name="title"
+            type="text"
+            placeholder="Story title"
+            required
+            />
+
+            <label for="story-description" class="visually-hidden">Story description</label>
+            <textarea
+            id="story-description"
+            name="description"
+            placeholder="Description"
+            ></textarea>
+
+        <button type="submit">Save story</button>
+        </form>
+
+        <p id="story-form-error" class="error" role="alert" hidden></p>
+    </section>
+
+    <section class="library">
+        <h2>Library</h2>
+
+        <div id="stories-list"></div>
+    </section>
+    
 
     <main id="app"></main>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="./storyBuilderApp.mjs"></script>
+    <link rel="stylesheet" href="./styles/indexStyle.css">
+    <script type="module" src="../controllers/storyBuilderApp.mjs"></script>
 
 </body>
 </html>

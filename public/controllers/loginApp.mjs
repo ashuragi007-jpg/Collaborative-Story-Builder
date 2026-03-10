@@ -1,9 +1,9 @@
-import "./components/user-login.mjs";
-import "./components/user-create.mjs";
-import "./components/account-manage.mjs";
-import { userState } from "./state/userState.mjs";
-import { usersActions } from "./actions/usersActions.mjs";
-import { loadTranslations } from "./utils/translate.mjs";
+import "../components/user-login.mjs";
+import "../components/user-create.mjs";
+import "../components/account-manage.mjs";
+import { userState } from "../state/userState.mjs";
+import { usersActions } from "../actions/usersActions.mjs";
+import { loadTranslations } from "../utils/translate.mjs";
 
 await loadTranslations();
 
