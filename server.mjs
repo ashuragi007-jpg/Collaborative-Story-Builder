@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 app.use("/users", securityAudit, userRouter);
-app.use("/auth", authRouter);
+app.use("/auth", securityAudit, authRouter);
 app.use("/stories", storyRouter);
 app.use("/chapters", chapterRouter);
 

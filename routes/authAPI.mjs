@@ -18,7 +18,7 @@ authRouter.post("/login", async (req, res) => {
     return res.status(401).json({ error: "invalid credentials" });
   }
 
-  if (user.password_hash !== req.token?.psw) {
+  if (!user || user.passwordHash !== req.token?.psw) {
     return res.status(401).json({ error: "invalid credentials" });
   }
 

@@ -51,7 +51,7 @@ async editPassword(root, id, password) {
   const clean = String(password ?? "").trim();
   if (!clean) throw new Error("Password required");
 
-  await api(`/users/${id}/password`, {
+  await api(`/auth/users/${id}/password`, {
     method: "PATCH",
     body: { password: clean }
   });
