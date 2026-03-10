@@ -69,3 +69,10 @@ body {
   white-space: nowrap;
   border: 0;
 }
+
+input:focus,
+button:focus,
+a:focus {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}

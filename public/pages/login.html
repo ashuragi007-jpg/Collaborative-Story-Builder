@@ -78,52 +78,54 @@
   </template>
 
   <template id="tpl-account-manage">
-    <section class="card">
-      <h2>Manage account</h2>
+  <section class="card" aria-labelledby="manage-account-heading">
+    <h2 id="manage-account-heading">Manage account</h2>
 
-      <div class="account-info">
-        <h3>Information</h3>
-        <p><strong>ID:</strong> <span class="info-id"></span></p>
-        <p><strong>Username:</strong> <span class="info-username"></span></p>
-        <p><strong>Created:</strong> <span class="info-created"></span></p>
-      </div>
+    <div class="account-info" aria-labelledby="account-info-heading">
+      <h3 id="account-info-heading">Information</h3>
+      <p><strong>ID:</strong> <span class="info-id"></span></p>
+      <p><strong>Username:</strong> <span class="info-username"></span></p>
+      <p><strong>Created:</strong> <span class="info-created"></span></p>
+    </div>
 
-      <div class="account-change">
-        <h3>Change</h3>
+    <div class="account-change" aria-labelledby="account-change-heading">
+      <h3 id="account-change-heading">Change</h3>
 
-        <form class="row edit-form">
-          <label for="edit-username" class="visually-hidden">New username</label>
-          <input
-            id="edit-username"
-            name="username"
-            type="text"
-            placeholder="New username"
-            required
-          />
-          <button type="submit">Save username</button>
-        </form>
+      <form class="row edit-form" aria-label="Change username form">
+        <label for="edit-username" class="visually-hidden">New username</label>
+        <input
+          id="edit-username"
+          name="username"
+          type="text"
+          placeholder="New username"
+          autocomplete="username"
+          required
+        />
+        <button type="submit">Save username</button>
+      </form>
 
-        <form class="row password-form">
-          <label for="edit-password" class="visually-hidden">New password</label>
-          <input
-            id="edit-password"
-            name="password"
-            type="password"
-            placeholder="New password"
-            required
-          />
-          <button type="submit">Save password</button>
-        </form>
-      </div>
+      <form class="row password-form" aria-label="Change password form">
+        <label for="edit-password" class="visually-hidden">New password</label>
+        <input
+          id="edit-password"
+          name="password"
+          type="password"
+          placeholder="New password"
+          autocomplete="new-password"
+          required
+        />
+        <button type="submit">Save password</button>
+      </form>
+    </div>
 
-      <div class="account-actions">
-        <button class="logout-btn" type="button">Logout</button>
-        <button class="delete-btn" type="button">Delete my account</button>
-      </div>
+    <div class="account-actions" aria-label="Account actions">
+      <button class="logout-btn" type="button">Logout</button>
+      <button class="delete-btn" type="button">Delete my account</button>
+    </div>
 
-      <p class="error" role="alert" hidden></p>
-    </section>
-  </template>
+    <p class="error" role="alert" aria-live="polite" hidden></p>
+  </section>
+</template>
 
   <script type="module" src="../loginApp.mjs"></script>
 </body>
