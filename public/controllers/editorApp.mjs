@@ -13,6 +13,7 @@ const addChapterBtn = document.querySelector("#add-chapter-btn");
 const editorPanel = document.querySelector("#editor-panel");
 const editorPlaceholder = document.querySelector("#editor-placeholder");
 const chapterContent = document.querySelector("#chapter-content");
+const chapterForm = document.querySelector("#chapter-form");
 
 let activeChapterId = null;
 
@@ -31,6 +32,45 @@ addChapterBtn.addEventListener("click", () => {
   showEditor();
   chapterContent.value = "";
   chapterContent.focus();
+});
+
+chapterForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const content = chapterContent.value.trim();
+
+  if (!content) {
+    alert("Chapter content cannot be empty");
+    return;
+  }
+
+  try {
+    if (activeChapterId === null) {
+      await api("/chapters", {
+        method: "POST",
+        body: {
+          storyId,
+          content
+        }
+      });
+    } else {
+      await api(`/chapters/${activeChapterId}`, {
+        method: "PATCH",
+        body: {
+          content
+        }
+      });
+    }
+
+    chapterContent.value = "";
+    activeChapterId = null;
+
+    await loadChapters();
+    showOverview();
+  } catch (err) {
+    console.error("Save chapter failed:", err);
+    alert(err.message || "Failed to save chapter");
+  }
 });
 
 async function loadStory() {
@@ -64,8 +104,6 @@ async function loadChapters() {
     <span class="chapter-date">${new Date(ch.created_at).toLocaleString()}</span>
   </article>
 `).join("");
-
-
 
   const chapterCards = chaptersList.querySelectorAll(".chapter-card");
 

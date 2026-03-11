@@ -175,3 +175,73 @@
   font-size: 12px;
   opacity: 0.7;
 }
+
+#chapters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.editor-page{
+  max-width: 1100px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* top area (image + title info) */
+
+.overview-top{
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+}
+
+.overview-meta{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.overview-title-box{
+  border: 2px solid black;
+  padding: 16px;
+}
+
+.overview-info-box{
+  border: 2px solid black;
+  padding: 16px;
+}
+
+/* description */
+
+.overview-description-box{
+  border: 2px solid black;
+  padding: 20px;
+  min-height: 120px;
+}
+
+/* chapter list */
+
+.overview-chapters-box{
+  border: 2px solid black;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* chapter list inside overview */
+
+#chapters-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
