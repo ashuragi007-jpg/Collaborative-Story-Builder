@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story Editor</title>
+  <link rel="stylesheet" href="../styles/editor.css">
+</head>
+<body>
+
+  <main class="story-editor-layout">
+
+    <aside class="story-sidebar">
+      <div class="story-cover">Placeholder [MUST BE REPLACED]</div>
+
+      <div class="story-meta">
+        <h1 id="story-title">Loading story...</h1>
+        <p id="story-description"></p>
+        <p id="story-created"></p>
+      </div>
+
+      <section class="chapter-sidebar-section">
+        <div class="chapter-sidebar-header">
+          <h2>Chapters</h2> 
+          <button id="add-chapter-btn" type="button">+</button>
+        </div>
+
+        <div id="chapters-list"></div>
+      </section>
+    </aside>
+
+    <section class="editor-area">
+      <p id="editor-placeholder">Select a chapter or click + to start writing.</p>
+
+      <section class="story-editor-panel" id="editor-panel" hidden>
+        <h2>Writing</h2>
+
+        <form id="chapter-form">
+          <label for="chapter-content" class="visually-hidden">Chapter content</label>
+          <textarea
+            id="chapter-content"
+            name="content"
+            placeholder="Write your chapter here..."
+          ></textarea>
+
+          <button id="save-chapter-btn" type="submit">Save</button>
+        </form>
+
+        <p id="story-error" class="error" role="alert" hidden></p>
+      </section>
+    </section>
+
+  </main>
+
+  <script type="module" src="../controllers/editor.mjs"></script>
+</body>
+</html>
