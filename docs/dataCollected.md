@@ -18,4 +18,10 @@ The following information are stored when a user makes a story.
 - title: the title of the story that user provided
 - description: short description of the story
 - content: text content pf the chapter written by users
-- created_at: a timestamp when the chapter was created
+- created_at: a timestamp when the chapter was created.
+
+## Chapter Data
+- id: unique identifier for each chapter
+- story_id: reference to the story the chapter belongs to
+- content: the story content that was written by user
+- created_at: timestamp of when it was created

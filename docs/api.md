@@ -65,3 +65,6 @@ This file contains API routes for the COllaborative Story Builder.
 
 ### GET /chapters/byStory/:storyId
     - returns all chapters that match the story id.
+
+### PATCH /chapters/:id
+    - updates an existing chapter, and it have the same requirement of having more than 50 words and lesser than 3000 words.
