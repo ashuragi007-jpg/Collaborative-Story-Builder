@@ -46,3 +46,24 @@ export async function createChapter({ storyId, content }) {
 
   return result.rows[0];
 }
+
+export async function updateChapter(id, content) {
+  const result = await pool.query(
+    `UPDATE chapters
+     SET content = $2
+     WHERE id = $1
+     RETURNING id, story_id, content, created_at`,
+    [id, content]
+  );
+
+  const row = result.rows[0];
+
+  if (!row) return null;
+
+  return {
+    id: row.id,
+    storyId: row.story_id,
+    content: row.content,
+    createdAt: row.created_at
+  };
+}
