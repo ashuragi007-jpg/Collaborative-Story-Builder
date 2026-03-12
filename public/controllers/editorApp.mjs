@@ -38,6 +38,7 @@ chapterForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const content = chapterContent.value.trim();
+  const authorId = localStorage.getItem("currentUserId");
 
   if (!content) {
     alert("Chapter content cannot be empty");
@@ -50,14 +51,16 @@ chapterForm.addEventListener("submit", async (e) => {
         method: "POST",
         body: {
           storyId,
-          content
+          content,
+          authorId
         }
       });
     } else {
       await api(`/chapters/${activeChapterId}`, {
         method: "PATCH",
         body: {
-          content
+          content,
+          authorId
         }
       });
     }

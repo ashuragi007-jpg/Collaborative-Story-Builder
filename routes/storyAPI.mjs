@@ -26,7 +26,7 @@ storyRouter.get("/:id", async (req, res) => {
 
 storyRouter.post("/", async (req, res) => {
   const lang = req.headers["accept-language"] || "";
-  const { title, description } = req.body ?? {};
+  const { title, description, authorId } = req.body ?? {};
 
   if (!title || typeof title !== "string") {
     return res.status(400).json({
@@ -34,7 +34,13 @@ storyRouter.post("/", async (req, res) => {
     });
   }
 
-  const newStory = await createStory({ title, description });
+  if (!authorId || typeof authorId !== "string") {
+    return res.status(400).json({
+      error: translate(lang, "errors.loginRequired")
+    });
+  }
+
+  const newStory = await createStory({ title, description, authorId });
 
   res.status(201).json(newStory);
 });

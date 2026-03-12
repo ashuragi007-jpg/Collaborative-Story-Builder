@@ -33,7 +33,7 @@ chapterRouter.get("/:id", async (req, res) => {
 
 chapterRouter.post("/", sanitizeContent, validateChapterLength, async (req, res) => {
   const lang = req.headers["accept-language"] || "";
-  const { storyId, content } = req.body ?? {};
+  const { storyId, content, authorId } = req.body ?? {};
 
   if (!storyId || typeof storyId !== "string") {
     return res.status(400).json({
@@ -47,9 +47,16 @@ chapterRouter.post("/", sanitizeContent, validateChapterLength, async (req, res)
     });
   }
 
+  if (!authorId || typeof authorId !== "string") {
+    return res.status(401).json({
+      error: translate(lang, "errors.loginRequired")
+    });
+  }
+
   const newChapter = await createChapter({
     storyId,
-    content
+    content,
+    authorId
   });
 
   res.json({
@@ -66,8 +73,14 @@ chapterRouter.post("/", sanitizeContent, validateChapterLength, async (req, res)
 
 chapterRouter.patch("/:id", sanitizeContent, validateChapterLength, async (req, res) => {
   const lang = req.headers["accept-language"] || "";
-  const { content } = req.body ?? {};
+  const { content,authorId } = req.body ?? {};
 
+   if (!authorId || typeof authorId !== "string") {
+    return res.status(401).json({
+      error: translate(lang, "errors.loginRequired")
+    });
+  }
+  
   if (!content || typeof content !== "string") {
     return res.status(400).json({
       error: translate(lang, "validation.contentRequired"),

@@ -9,17 +9,18 @@ function validateChapterLength(req, res, next){
 
     const wordCount = content.trim().split(/\s+/).length;
 
-    if(wordCount < 50){
+    if (wordCount < 50) {
         return res.status(400).json({
-            message: "Chapter must be at least 50 words"
+             error: "Chapter must contain at least 50 words."
         });
     }
 
-    if(wordCount > 3000){
+    if (wordCount > 3000) {
         return res.status(400).json({
-            message: "Chapter must not exceed 3000 words"
+            error: "Chapter must not exceed 3000 words."
         });
     }
+
     next();
 }
 

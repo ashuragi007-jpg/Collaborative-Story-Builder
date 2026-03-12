@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS stories (
     id UUID PRIMARY KEY,
     title TEXT NOT NULL,
     description TEXT,
+    author_id REFERENCES users(id),
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

@@ -15,7 +15,8 @@
     "storyNotFound": "Fortelling ikke funnet",
     "userNotFound": "Bruker ikke funnet",
     "databaseError": "Databasefeil",
-    "usernameAlreadyTaken": "Brukernavnet er allerede tatt"
+    "usernameAlreadyTaken": "Brukernavnet er allerede tatt",
+    "loginRequired": "Du må være logget inn for å lage fortelling"
   },
   "success": {
     "chapterAccepted": "Kapittel godkjent",

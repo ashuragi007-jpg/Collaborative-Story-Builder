@@ -34,14 +34,18 @@ export async function findChapterById(id) {
   return result.rows[0] ?? null;
 }
 
-export async function createChapter({ storyId, content }) {
-  const id = crypto.randomUUID();
+export async function createChapter({ storyId, content, authorId }) {
 
   const result = await pool.query(
-    `INSERT INTO chapters (id, story_id, content)
-     VALUES ($1, $2, $3)
-     RETURNING id, story_id, content, created_at`,
-    [id, storyId, content]
+    `INSERT INTO chapters (id, story_id, content, author_id)
+     VALUES ($1, $2, $3, $4)
+     RETURNING id, story_id, content, author_id, created_at`,
+    [
+      crypto.randomUUID(),
+      storyId,
+      content,
+      authorId
+    ]
   );
 
   return result.rows[0];

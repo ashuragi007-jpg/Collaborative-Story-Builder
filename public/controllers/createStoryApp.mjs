@@ -12,13 +12,14 @@ form.addEventListener("submit", async (e) => {
   const data = new FormData(form);
   const title = data.get("title");
   const description = data.get("description");
+  const authorId = localStorage.getItem("currentUserId");
 
   try {
     errorEl.hidden = true;
 
     const story = await api("/stories", {
       method: "POST",
-      body: { title, description }
+      body: { title, description, authorId }
     });   
 
     window.location.href = `/pages/editor.html?id=${story.id}`;

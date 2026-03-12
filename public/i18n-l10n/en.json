@@ -15,7 +15,8 @@
     "storyNotFound": "Story not found",
     "userNotFound": "User not found",
     "databaseError": "Database error",
-    "usernameAlreadyTaken": "Username already taken"
+    "usernameAlreadyTaken": "Username already taken",
+    "loginRequired": "You must be logged in to create a story"
   },
   "success": {
     "chapterAccepted": "Chapter accepted",
