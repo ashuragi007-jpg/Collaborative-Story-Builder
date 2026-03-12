@@ -16,6 +16,7 @@ The following information are stored when user made an account.
 The following information are stored when a user makes a story.
 - id: unique identifier for the story
 - title: the title of the story that user provided
+- author_id: the user id of the user that creates the story
 - description: short description of the story
 - content: text content pf the chapter written by users
 - created_at: a timestamp when the chapter was created.
@@ -23,5 +24,6 @@ The following information are stored when a user makes a story.
 ## Chapter Data
 - id: unique identifier for each chapter
 - story_id: reference to the story the chapter belongs to
+- author_id: the user id of the user that creates the chapter.
 - content: the story content that was written by user
 - created_at: timestamp of when it was created

@@ -1,5 +1,21 @@
 # Overview
 
+## Application Flow
+The application have two main types of usage: reading stories and writing stories.
+
+### Reader Flow
+Users can browse stories without needing an account.
+- Library shows the list of stories.
+- Story view displays story information and list of chapters
+
+### Writer Flow
+Users must create an account and log in before they can make stories
+- Logged in users can create stories
+- stories are written and manage inside the editor.
+- writers can add chapters and edit their chapters.
+
+Stories and chapters are tied to the author through "author_id"
+
 This document describes the overall structure of the Collaborative Story Builder application
 
 ## Frontend structure
@@ -10,6 +26,14 @@ This document describes the overall structure of the Collaborative Story Builder
         * user-login.mjs
         * user-create.mjs
         * account-manage.mjs
+- controllers/
+    * contains controllers for the collaborative app, such as:
+        * chapterApp.mjs
+        * readerApp.mjs
+        * loginApp.mjs
+        * storyBuilderApp.mjs
+        * createStoryApp.mjs
+        * editorApp.mjs
 - actions/
     * API communications logic such as:
         * apiClient.mjs
@@ -20,7 +44,11 @@ This document describes the overall structure of the Collaborative Story Builder
 - utils/
     * shared frontend helper such as:
         * translate.mjs
-
+- styels/
+    * contains all CSS files used for different pages. Such as:
+        * editor.css
+        * indexStyle.css
+        * Loginstyle.css
 Two main frontend entry points are:
 - loginApp.mjs: handles user login, creating account and account management
 - storyBuilderApp.mjs: 
