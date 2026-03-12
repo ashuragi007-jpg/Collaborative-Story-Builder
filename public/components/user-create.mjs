@@ -22,7 +22,10 @@ class UserCreate extends HTMLElement {
         });
 
         userState.setCurrentUserId(created.id);
+        localStorage.setItem("currentUserId", created.id);
+        localStorage.setItem("currentUsername", created.username);
         document.dispatchEvent(new Event("session:changed"));
+
 
         form.reset();
       } catch (e) {

@@ -1,0 +1,88 @@
+.chapter-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#story-title {
+  margin: 0;
+}
+
+#chapter-title {
+  margin: 0;
+}
+
+.chapter-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.chapter-nav button {
+  border: 2px solid black;
+  background: white;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.chapter-nav button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#chapter-content {
+  border: 2px solid black;
+  padding: 20px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.chapter-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chapter-top {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#story-title {
+  text-align: center;
+}
+
+#chapter-title {
+  text-align: center;
+}
+
+.chapter-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+#chapter-content {
+  border: 2px solid black;
+  padding: 24px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.chapter-top {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.back-btn {
+    border: 2px solid black;
+    background: white;
+    padding: 8px 14px;
+    cursor: pointer;
+}

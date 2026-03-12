@@ -31,7 +31,15 @@ export async function findChapterById(id) {
     [id]
   );
 
-  return result.rows[0] ?? null;
+  const row = result.rows[0];
+  if (!row) return null;
+
+  return {
+    id: row.id,
+    storyId: row.story_id,
+    content: row.content,
+    createdAt: row.created_at
+  };
 }
 
 export async function createChapter({ storyId, content, authorId }) {

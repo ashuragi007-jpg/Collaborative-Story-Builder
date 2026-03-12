@@ -1,0 +1,105 @@
+.reader-page {
+  max-width: 1100px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.reader-top {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.reader-cover {
+  border: 2px solid black;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reader-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reader-title-box {
+  border: 2px solid black;
+  padding: 16px;
+}
+
+.reader-info-box {
+  border: 2px solid black;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reader-description-box {
+  border: 2px solid black;
+  padding: 20px;
+  min-height: 120px;
+}
+
+.reader-chapters-box {
+  border: 2px solid black;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#chapters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chapters-section {
+    margin-bottom: 4px;
+}
+
+.chapters-section hr {
+    border: none;
+    border-top: 2px solid black;
+    margin-bottom: 12px;
+}
+
+.reader-chapter {
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.reader-chapter {
+  border: 1px solid black;
+  padding: 16px;
+}
+
+.reader-chapter h2 {
+  margin: 0 0 12px;
+}
+
+.reader-chapter p {
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.reader-chapter:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+  .reader-page {
+    margin: 20px;
+  }
+
+  .reader-top {
+    grid-template-columns: 1fr;
+  }
+}

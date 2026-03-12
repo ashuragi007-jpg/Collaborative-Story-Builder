@@ -1,6 +1,7 @@
 import { api } from "../actions/apiClient.mjs";
 
 const storyTitle = document.querySelector("#story-title");
+const storyAuthor = document.querySelector("#story-author")
 const storyDescription = document.querySelector("#story-description");
 const storyCreated = document.querySelector("#story-created");
 
@@ -80,6 +81,7 @@ async function loadStory() {
   const story = await api(`/stories/${storyId}`);
 
   storyTitle.textContent = story.title;
+  storyAuthor.textContent = story.author || "Unknown";
   storyDescription.textContent = story.description || "No description";
   storyCreated.textContent = new Date(story.created_at).toLocaleString();
 }

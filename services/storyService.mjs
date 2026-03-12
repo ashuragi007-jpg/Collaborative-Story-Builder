@@ -16,9 +16,15 @@ export async function createStory({ title, description, authorId }) {
 
 export async function listStories() {
   const result = await pool.query(
-    `SELECT id, title, description, author_id, created_at
+    `SELECT
+      stories.id,
+      stories.title,
+      stories.description,
+      stories.created_at,
+      users.username AS author
      FROM stories
-     ORDER BY created_at DESC`
+     LEFT JOIN users ON users.id = stories.author_id
+     ORDER BY stories.created_at DESC`
   );
 
   return result.rows;
@@ -26,9 +32,15 @@ export async function listStories() {
 
 export async function findStoryById(id) {
   const result = await pool.query(
-    `SELECT id, title, description, author_id, created_at
+    `SELECT
+      stories.id,
+      stories.title,
+      stories.description,
+      stories.created_at,
+      users.username AS author
      FROM stories
-     WHERE id = $1`,
+     LEFT JOIN users ON users.id = stories.author_id
+     WHERE stories.id = $1`,
     [id]
   );
 

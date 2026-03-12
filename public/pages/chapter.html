@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read Chapter</title>
+  <link rel="stylesheet" href="../styles/chapterStyle.css">
+</head>
+<body>
+
+  <main class="chapter-page">
+    <div class="chapter-top">
+        <button class="back-btn" type="button">Back to Story</button>
+    </div>
+
+    <h1 id="story-title">Loading story...</h1>
+    <h2 id="chapter-title">Loading chapter...</h2>
+
+    <nav class="chapter-nav">
+      <button id="prev-btn" type="button">Previous</button>
+      <button id="next-btn" type="button">Next</button>
+    </nav>
+
+    <article id="chapter-content"></article>
+
+    <nav class="chapter-nav">
+      <button id="prev-btn-bottom" type="button">Previous</button>
+      <button id="next-btn-bottom" type="button">Next</button>
+    </nav>
+    
+  </main>
+
+  <script type="module" src="../controllers/chapterApp.mjs"></script>
+</body>
+</html>
