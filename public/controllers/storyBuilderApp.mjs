@@ -28,7 +28,7 @@ function renderStories(stories) {
   cards.forEach(card => {
     card.addEventListener("click", () => {
       const id = card.dataset.id;
-      window.location.href = `/pages/editor.html?id=${id}`;
+      window.location.href = `/pages/readerView.html?id=${id}`;
     });
   });
 }
@@ -36,7 +36,6 @@ function renderStories(stories) {
 async function loadStories() {
     try {
         const data = await api("/stories");
-
         const stories = data.stories || data;
 
         renderStories(stories);
