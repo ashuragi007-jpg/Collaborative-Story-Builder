@@ -1,16 +1,23 @@
 import { api } from "../actions/apiClient.mjs";
  
 const createStoryBtn = document.querySelector("#create-story-btn");
-const createStorySection = document.querySelector("#create-story-section");
-
+const authBtn = document.querySelector("#auth-btn");
 const storiesList = document.querySelector("#stories-list");
 
-createStoryBtn.addEventListener("click", ()=> {
-    window.location.href = "/pages/create-story.html";
+createStoryBtn.addEventListener("click", () => {
+  window.location.href = "/pages/create-story.html";
+});
+
+function updateAuthButton() {
+  const currentUserId = localStorage.getItem("currentUserId");
+  authBtn.textContent = currentUserId ? "Account" : "Login";
+}
+
+authBtn.addEventListener("click", () => {
+  window.location.href = "/pages/login.html";
 });
 
 function renderStories(stories) {
-
   if (!stories.length) {
     storiesList.innerHTML = "<p>No stories yet.</p>";
     return;
@@ -34,15 +41,14 @@ function renderStories(stories) {
 }
 
 async function loadStories() {
-    try {
-        const data = await api("/stories");
-        const stories = data.stories || data;
-
-        renderStories(stories);
-    } catch (err) {
-        console.error("Failed to load Stories");
-    }
-    
+  try {
+    const data = await api("/stories");
+    const stories = data.stories || data;
+    renderStories(stories);
+  } catch (err) {
+    console.error("Failed to load Stories");
+  }
 }
 
+updateAuthButton();
 loadStories();

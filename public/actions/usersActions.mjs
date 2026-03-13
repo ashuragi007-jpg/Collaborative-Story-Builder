@@ -20,6 +20,7 @@ export const usersActions = {
   localStorage.setItem("currentUsername", data.username);
 
   document.dispatchEvent(new Event("session:changed"));
+  window.location.href = "/";
   return data;
 },
 
