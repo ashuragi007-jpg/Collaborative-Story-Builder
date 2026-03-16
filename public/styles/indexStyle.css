@@ -98,3 +98,16 @@
   font-size: 16px;
   text-align: center;
 }
+
+.back-btn {
+  border: 2px solid black;
+  background: white;
+  padding: 8px 14px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background: black;
+  color: white;
+}
