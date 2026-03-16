@@ -1,5 +1,5 @@
 import express from "express";
-import { createStory, listStories, findStoryById } from "../services/storyService.mjs";
+import { createStory, listStories, findStoryById, findStoriesByAuthor } from "../services/storyService.mjs";
 import { translate } from "../modules/translator.mjs";
 
 const storyRouter = express.Router();
@@ -10,6 +10,18 @@ storyRouter.get("/", async (req, res) => {
   const stories = await listStories();
   res.json({ stories });
 });
+
+storyRouter.get("/byAuthor/:authorId", async (req, res) => {
+  const lang = req.headers["accept-language"] || "";
+  try {
+    const stories = await findStoriesByAuthor(req.params.authorId);
+    res.json({ stories });
+  } catch {
+    return res.status(400).json({
+      error: translate(lang, "errors.storyNotFound")
+    });
+  }
+})
 
 storyRouter.get("/:id", async (req, res) => {
   const lang = req.headers["accept-language"] || "";

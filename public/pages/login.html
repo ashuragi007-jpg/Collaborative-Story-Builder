@@ -6,7 +6,12 @@
   <link rel="stylesheet" href="../styles/Loginstyle.css">
 </head>
 <body>
+
+  <div class="login-page">
+  <button class="back-btn" onclick="window.location.href=`/`">Back</button>
+
   <div id="app"></div>
+  </div>
 
   <template id="tpl-login">
     <section class="card login-card">
@@ -86,6 +91,11 @@
       <p><strong>ID:</strong> <span class="info-id"></span></p>
       <p><strong>Username:</strong> <span class="info-username"></span></p>
       <p><strong>Created:</strong> <span class="info-created"></span></p>
+    </div>
+
+    <div class="stories-section">
+      <h3>My Stories</h3>
+      <user-stories></user-stories>
     </div>
 
     <div class="account-change" aria-labelledby="account-change-heading">

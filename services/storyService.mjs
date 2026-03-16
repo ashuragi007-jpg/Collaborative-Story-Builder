@@ -30,6 +30,17 @@ export async function listStories() {
   return result.rows;
 }
 
+export async function findStoriesByAuthor(authorId) {
+  const result = await pool.query (
+    ` SELECT id, title, created_at
+      FROM stories
+      WHERE author_id = $1
+      ORDER BY created_at DESC`,
+      [authorId]
+  )
+  return result.rows;
+}
+
 export async function findStoryById(id) {
   const result = await pool.query(
     `SELECT

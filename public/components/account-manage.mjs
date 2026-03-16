@@ -1,3 +1,4 @@
+import "../components/user-stories.mjs";
 import { userState } from "../state/userState.mjs";
 import { usersActions } from "../actions/usersActions.mjs";
 import { translate } from "../utils/translate.mjs";
@@ -22,6 +23,7 @@ class AccountManage extends HTMLElement {
     this.deleteBtn = this.querySelector(".delete-btn");
     this.logoutBtn = this.querySelector(".logout-btn");
     this.err = this.querySelector(".error");
+    this.myStories = this.querySelector(".my-stories");
 
     this.logoutBtn.addEventListener("click", () => {
       userState.setCurrentUserId(null);
