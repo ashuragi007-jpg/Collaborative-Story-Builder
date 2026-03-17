@@ -26,6 +26,7 @@ This document describes the overall structure of the Collaborative Story Builder
         * user-login.mjs
         * user-create.mjs
         * account-manage.mjs
+        * user-stories.mjs
 - controllers/
     * contains controllers for the collaborative app, such as:
         * chapterApp.mjs
@@ -44,6 +45,7 @@ This document describes the overall structure of the Collaborative Story Builder
 - utils/
     * shared frontend helper such as:
         * translate.mjs
+        * backButton.mjs
 - styels/
     * contains all CSS files used for different pages. Such as:
         * editor.css

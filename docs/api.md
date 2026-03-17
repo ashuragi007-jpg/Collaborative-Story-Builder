@@ -44,6 +44,10 @@ This file contains API routes for the COllaborative Story Builder.
 ### GET /stories
 - returns all stored stories.
 
+### GET /stories/byAuthor/:authorId
+- returns all stories created by a specific user.
+- used in account management to display all previous works of the user 
+
 ### GET /stories/:id 
 - returns a story that matches the id
 - returns 404 if the story doesnt exist
