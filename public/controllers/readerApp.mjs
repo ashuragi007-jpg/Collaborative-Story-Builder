@@ -15,7 +15,7 @@ async function loadStory() {
 
     storyTitle.textContent = story.title;
     storyDescription.textContent = story.description || "No description";
-    storyAuthor.textContent = story.author || "Unknown author";
+    storyAuthor.textContent = story.author || "deleted user";
     storyCreated.textContent = new Date(story.created_at).toLocaleString();
   } catch (err) {
     console.error("Failed to load story:", err);

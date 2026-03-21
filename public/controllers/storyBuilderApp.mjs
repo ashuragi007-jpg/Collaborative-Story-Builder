@@ -24,21 +24,22 @@ function renderStories(stories) {
   }
 
   storiesList.innerHTML = stories.map(story => `
-    <div class="story-card" data-id="${story.id}">
-      <img src="/img/thanos.webp" alt="Story cover">
-      <h3>${story.title}</h3>
+    <div class="story-row" data-id="${story.id}">
+      <span class="story-thumb">
+        <img src="/img/book thumb black.png" alt="thumbnail">
+      </span>
+      <span class="story-row-title">${story.title}</span>
     </div>
   `).join("");
-
-  const cards = document.querySelectorAll(".story-card");
-
-  cards.forEach(card => {
-    card.addEventListener("click", () => {
-      const id = card.dataset.id;
-      window.location.href = `/pages/readerView.html?id=${id}`;
-    });
-  });
 }
+
+storiesList.addEventListener("click", (e) => {
+  const row = e.target.closest(".story-row");
+  if (!row) return;
+
+  const id = row.dataset.id;
+  window.location.href = `/pages/readerView.html?id=${id}`;
+});
 
 async function loadStories() {
   try {
@@ -46,7 +47,7 @@ async function loadStories() {
     const stories = data.stories || data;
     renderStories(stories);
   } catch (err) {
-    console.error("Failed to load Stories");
+    console.error("Failed to load stories", err);
   }
 }
 
