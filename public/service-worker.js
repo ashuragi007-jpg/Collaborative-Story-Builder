@@ -4,7 +4,8 @@ const FILES_TO_CACHE = [
   "/",
 
 
-  "/manifest/manifest-v2.json",
+  "/manifest/manifest.json",
+  "/controllers/storyBuilderApp.mjs",
 
   "/styles/indexStyle.css",
 
