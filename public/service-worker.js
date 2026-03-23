@@ -56,8 +56,16 @@ self.addEventListener("fetch", (event) => {
         if (cachedResponse) return cachedResponse;
 
         if (request.mode === "navigate") {
-          return caches.match("/index.html");
+            const fallbackPage = await caches.match("/");
+            if (fallbackPage) {
+                return fallbackPage;
+            }
         }
+        return new Response ("Offline content is not available.", {
+            status: 503,
+            statusText: "Service Unavailable",
+            headers: {"Content-Type":"text/plain"}
+        })
       })
   );
 });
