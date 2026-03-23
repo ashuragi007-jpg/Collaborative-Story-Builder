@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Story Editor</title>
+  <link rel="manifest" href="/public/manifest/manifest.json">
   <link rel="stylesheet" href="../styles/editor.css">
+
+  <title>Story Editor</title>
 </head>
 <body>
 
@@ -14,7 +16,7 @@
 
     <aside class="story-sidebar">
       <div class="story-cover">
-        <img src="/img/book thumb black.png" alt="Editor Cover">
+        <img src="/img/book-thumb-black.png" alt="Editor Cover">
       </div>
 
       <div class="story-meta">
@@ -59,5 +61,6 @@
 
   <script type="module" src="../utils/backButton.mjs"></script>
   <script type="module" src="../controllers/editorApp.mjs"></script>
+  <script type="module" src="./utils/registerSW.mjs"></script>
 </body>
 </html>

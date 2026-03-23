@@ -26,7 +26,7 @@ function renderStories(stories) {
   storiesList.innerHTML = stories.map(story => `
     <div class="story-row" data-id="${story.id}">
       <span class="story-thumb">
-        <img src="/img/book thumb black.png" alt="thumbnail">
+        <img src="/img/book-thumb-black.png" alt="thumbnail">
       </span>
       <span class="story-row-title">${story.title}</span>
     </div>

@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Login / Account</title>
+  <link rel="manifest" href="/public/manifest/manifest.json">
   <link rel="stylesheet" href="../styles/Loginstyle.css">
+
+  <title>Login / Account</title>
 </head>
 <body>
 
@@ -136,7 +138,7 @@
     <p class="error" role="alert" aria-live="polite" hidden></p>
   </section>
 </template>
-
   <script type="module" src="../controllers/loginApp.mjs"></script>
+  <script type="module" src="./utils/registerSW.mjs"></script>
 </body>
 </html>

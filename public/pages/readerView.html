@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Story Reader</title>
+  <link rel="manifest" href="/public/manifest/manifest.json">
   <link rel="stylesheet" href="../styles/readerStyle.css">
+
+  <title>Story Reader</title>
 </head>
 <body>
 
@@ -14,7 +16,7 @@
 
     <section class="reader-top">
       <div class="reader-cover">
-        <img src="/img/book thumb black.png" alt="Story cover">
+        <img src="/img/book-thumb-black.png" alt="Story cover">
       </div>
 
       <div class="reader-meta">
@@ -43,7 +45,9 @@
 
   </main>
 
+  
   <script type="module" src="../utils/backButton.mjs"></script>
   <script type="module" src="../controllers/readerApp.mjs"></script>
+  <script type="module" src="./utils/registerSW.mjs"></script>
 </body>
 </html>

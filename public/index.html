@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest/manifest-v2.json">
+    <link rel="stylesheet" href="./styles/indexStyle.css">
     <title>Collaboraive Story Builder</title>
 </head>
 <body>
@@ -25,8 +27,8 @@
     
 
     <main id="app"></main>
-    <link rel="stylesheet" href="./styles/indexStyle.css">
     <script type="module" src="../controllers/storyBuilderApp.mjs"></script>
+    <script type="module" src="./utils/registerSW.mjs"></script>
 
 </body>
 </html>
