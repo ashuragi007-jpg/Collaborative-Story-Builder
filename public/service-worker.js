@@ -1,21 +1,17 @@
-const CACHE_NAME = "collab-story-builder-v2";
+const CACHE_NAME = "collab-story-builder-v3";
 
 const FILES_TO_CACHE = [
   "/",
-  "/index.html",
-  "chapter.html",
+
 
   "/manifest/manifest-v2.json",
 
   "/styles/indexStyle.css",
 
   "/img/book-transparent.png",
-  "/img/book-thumb-black.png",
 
-  "/controllers/storyBuilderApp.mjs",
-  "/controllers/chapterApp.mjs/",
 
-  "/utils/registerSW.mjs"
+ 
 
 ];
 
