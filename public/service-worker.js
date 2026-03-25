@@ -2,18 +2,10 @@ const CACHE_NAME = "collab-story-builder-v3";
 
 const FILES_TO_CACHE = [
   "/",
-
-
   "/manifest/manifest.json",
   "/controllers/storyBuilderApp.mjs",
-
   "/styles/indexStyle.css",
-
   "/img/book-transparent.png",
-
-
- 
-
 ];
 
 self.addEventListener("install", (event) => {

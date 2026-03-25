@@ -48,12 +48,11 @@ This document describes the overall structure of the Collaborative Story Builder
         * backButton.mjs
 - styels/
     * contains all CSS files used for different pages. Such as:
+        * chapterStyle.css
         * editor.css
         * indexStyle.css
         * Loginstyle.css
-Two main frontend entry points are:
-- loginApp.mjs: handles user login, creating account and account management
-- storyBuilderApp.mjs: 
+        * readerStyle.css
 
 ## Backend structure
 - server.mjs: application entry point adn registers middleware. also starts the server
@@ -120,3 +119,12 @@ The system supports multiple language
     - public/i18n-l10n
         - en.json
         - no.json
+
+## Offline Support (PWA)
+The application supposts offline usage using a service worker.
+Only essential static assets such as the main page, stylesheet, manifest, are pre-cached as part of the app shell. Other content such as stories and chapters are cached dynamically after being fetched once online.
+
+This means:
+- Users must first load content while online
+- Previously visited content can then be accessed offline
+- New content cannot be fetched

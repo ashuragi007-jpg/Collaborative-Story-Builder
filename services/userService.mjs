@@ -1,6 +1,4 @@
-import user from "../dataObjects/user.mjs";
 import { generateID } from "../dataObjects/user.mjs";
-import { users } from "../dataStores/usersStore.mjs";
 import { pool } from "../db.mjs";
 
 

@@ -72,3 +72,12 @@ This file contains API routes for the COllaborative Story Builder.
 
 ### PATCH /chapters/:id
     - updates an existing chapter, and it have the same requirement of having more than 50 words and lesser than 3000 words.
+
+
+## Authentication
+Some requires the user to be logged in, such as:
+- POST/ stories
+- POST/ chapters
+- PATCH/chapters/:id
+- DELETE/users/:id
+- PATCH/auth/users/:id/password
