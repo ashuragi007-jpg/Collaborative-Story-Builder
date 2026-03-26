@@ -58,6 +58,14 @@ The application is installable and supports offline usage.
 ## Deployment
 - Base URL: https://collaborative-story-builder-zrt9.onrender.com
 
+## Demo Content
+- The deployed applcation includes stories and chapters. 
+
+- "Oblivion" a oneshot story
+- "Wish Upon The Star" a series of oneshot (3 chapters)
+
+ * These are provided to allow immediate testing of the functionality without requiring to make an account. Users can read existing stories from the library.
+
 # Link for Feature map and plan
 - Feature Map: https://www.figma.com/board/nZKzigzMy93RhhyVOSFRiG/Welcome-to-FigJam?node-id=0-1&t=tnfk5r6hunYfpqI5-1 
 - Project Plan: https://github.com/users/ashuragi007-jpg/projects/3
