@@ -9,7 +9,8 @@ export async function api(path, options = {}) {
     body: options.body ? JSON.stringify(options.body) : undefined
   });
 
-  const data = await response.json();
+ const text = await response.text();
+ const data = text ? JSON.parse(text) : null;
 
   if (!response.ok) {
     throw new Error(data.error || "Request failed");
