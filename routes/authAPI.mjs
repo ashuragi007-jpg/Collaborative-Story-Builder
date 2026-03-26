@@ -1,4 +1,5 @@
 import express from "express";
+import { translate } from "../modules/translator.mjs";
 import { findUserByUsername } from "../services/userService.mjs";
 import { updatePassword } from "../services/userService.mjs";
 
@@ -6,6 +7,7 @@ const authRouter = express.Router();
 authRouter.use(express.json());
 
 authRouter.post("/login", async (req, res) => {
+  const lang = req.headers["accept-language"] || "";
   const { username, password } = req.body ?? {};
 
   if (!username || !password) {
@@ -15,11 +17,11 @@ authRouter.post("/login", async (req, res) => {
   const user = await findUserByUsername(username);
 
   if (!user) {
-    return res.status(401).json({ error: "invalid credentials" });
+    return res.status(401).json({ error: translate(lang, "auth.invalidCredentials") });
   }
 
   if (!user || user.passwordHash !== req.token?.psw) {
-    return res.status(401).json({ error: "invalid credentials" });
+    return res.status(401).json({ error: translate(lang, "auth.invalidCredentials") });
   }
 
   res.json({

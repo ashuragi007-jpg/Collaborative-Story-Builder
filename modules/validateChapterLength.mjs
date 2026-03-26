@@ -1,9 +1,12 @@
+import { translate } from "./translator.mjs";
+
 function validateChapterLength(req, res, next){
+    const lang = req.headers["accept-language"] || "";
     const {content} = req.body;
 
     if (!content){
         return res.status(400).json({
-            message: "Content is required"
+            message: translate(lang, "validation.contentRequired")
         });
     }
 
@@ -11,13 +14,13 @@ function validateChapterLength(req, res, next){
 
     if (wordCount < 50) {
         return res.status(400).json({
-             error: "Chapter must contain at least 50 words."
+             error: translate(lang, "validation.chapterTooShort")
         });
     }
 
     if (wordCount > 3000) {
         return res.status(400).json({
-            error: "Chapter must not exceed 3000 words."
+            error: translate(lang, "validation.chapterTooLong")
         });
     }
 

@@ -1,4 +1,5 @@
 import { api } from "../actions/apiClient.mjs";
+import { translate, loadTranslations } from "../utils/translate.mjs";
 
 const storyTitle = document.querySelector("#story-title");
 const storyAuthor = document.querySelector("#story-author")
@@ -16,6 +17,8 @@ const editorPlaceholder = document.querySelector("#editor-placeholder");
 const chapterContent = document.querySelector("#chapter-content");
 const chapterForm = document.querySelector("#chapter-form");
 
+const lang = navigator.language;
+
 let activeChapterId = null;
 
 function showOverview() {
@@ -27,6 +30,8 @@ function showEditor() {
   editorPlaceholder.hidden = true;
   editorPanel.hidden = false;
 }
+
+await loadTranslations();
 
 addChapterBtn.addEventListener("click", () => {
   activeChapterId = null;
@@ -42,7 +47,7 @@ chapterForm.addEventListener("submit", async (e) => {
   const authorId = localStorage.getItem("currentUserId");
 
   if (!content) {
-    alert("Chapter content cannot be empty");
+    alert(translate(lang, "validation.contentRequired"))
     return;
   }
 
